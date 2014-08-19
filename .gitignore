@@ -7,3 +7,6 @@ atlassian-ide-plugin.xml
 [._]s[a-w][a-z]
 *.un~
 Session.vim
+
+### sphinx ###
+_build
