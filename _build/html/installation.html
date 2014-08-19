@@ -169,9 +169,107 @@ the needed bundles in <tt class="docutils literal"><span class="pre">AppKernel</
 </div>
 <div class="section" id="configuration-and-setup">
 <h3>Configuration and Setup<a class="headerlink" href="#configuration-and-setup" title="Permalink to this headline">¶</a></h3>
-<p>At this point, all of the needed third-party libraries now live in the <tt class="docutils literal"><span class="pre">vendor/</span></tt>
-directory. You also have a default application setup in <tt class="docutils literal"><span class="pre">app/</span></tt> and some
-sample code inside the <tt class="docutils literal"><span class="pre">src/</span></tt> directory.</p>
+<p>phlexible 1.0 requires some configuration to be added to app&#8217;s <tt class="docutils literal"><span class="pre">app/config/config.yml</span></tt> file. Add the following:</p>
+<div class="highlight-yaml"><div class="highlight"><pre># CMF Routing Bundle
+cmf_routing: ~
+
+# Igorw File Serve Bundle
+igorw_file_serve:
+    factory: php # php
+    #factory: sendfile # nginx
+    #factory: xsendfile # apache
+
+phlexible_gui:
+    project:
+        title:   Your Project Title
+        version: 1.0.0
+        url:     project.dev
+    database:
+        connections:
+            default:
+                type:     %database_driver%
+                host:     %database_host%
+                port:     %database_port%
+                dbname:   %database_name%
+                username: %database_user%
+                password: %database_password%
+                prefix:   &quot;&quot;
+    languages:
+        default:   en
+        available: en,de
+    mail:
+        from_name:  John Doe
+        from_email: john.doe@example.com
+
+phlexible_cache:
+    namespaces:
+        default:
+            type: Filesystem
+
+phlexible_cms:
+    languages:
+        default: de
+        available: en,de
+
+phlexible_message:
+    use_log_handler: false
+    audit_entities: false
+
+phlexible_meta_set:
+    languages:
+        default: de
+        available: en,de
+
+phlexible_media_cache:
+    storages:
+        default:
+            id: phlexible_media_cache.storage.local
+            options:
+                storage_dir: %media_cache_storage_dir%
+
+phlexible_media_site:
+    sites:
+        default:
+            id: 492d88c5-dd48-4d73-b849-1cacc0a80056 # this has to be a generated id
+            root_dir: %media_manager_root_dir%
+            quota: 1000000000
+            driver: phlexible_media_manager.site_default
+
+phlexible_siteroot:
+    overrides:
+        48ef589f-2ddc-4cb6-9a54-7e0dc0a8005b:
+            navigation:
+                0:
+                    url: project.dev
+                    path: ~
+                    language: ~
+                    default: 1
+                    type: element
+                    target: 1062
+
+phlexible_media_tool:
+    swftools:
+        pdf2swf: %tool_pdf2swf%
+        swfdump: %tool_swfdump%
+        swfcombine: %tool_swfcombine%
+
+    pdftotext:
+        pdftotext: %tool_pdftotext%
+        pdfinfo: %tool_pdfinfo%
+
+    mime:
+        file: %tool_file%
+
+    imagemagick:
+        identify: %tool_identify%
+        convert: %tool_convert%
+        mogrify: %tool_mogrify%
+
+    ffmpeg:
+        ffprobe: %tool_ffprobe%
+        ffmpeg: %tool_ffmpeg%
+</pre></div>
+</div>
 </div>
 </div>
 </div>

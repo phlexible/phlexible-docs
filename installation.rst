@@ -138,11 +138,315 @@ the needed bundles in ``AppKernel``::
     }
 
 Configuration and Setup
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
-At this point, all of the needed third-party libraries now live in the ``vendor/``
-directory. You also have a default application setup in ``app/`` and some
-sample code inside the ``src/`` directory.
+App configuration
+~~~~~~~~~~~~~~~~~
+
+phlexible 1.0 requires some configuration to be added to app's ``app/config/config.yml`` file:
+
+.. code-block:: yaml
+
+    # CMF Routing Bundle
+    cmf_routing: ~
+
+    # Igorw File Serve Bundle
+    igorw_file_serve:
+        factory: php # php
+        #factory: sendfile # nginx
+        #factory: xsendfile # apache
+
+    phlexible_gui:
+        project:
+            title:   Your Project Title
+            version: 1.0.0
+            url:     project.dev
+        database:
+            connections:
+                default:
+                    type:     %database_driver%
+                    host:     %database_host%
+                    port:     %database_port%
+                    dbname:   %database_name%
+                    username: %database_user%
+                    password: %database_password%
+                    prefix:   ""
+        languages:
+            default:   en
+            available: en,de
+        mail:
+            from_name:  John Doe
+            from_email: john.doe@example.com
+
+    phlexible_cache:
+        namespaces:
+            default:
+                type: Filesystem
+
+    phlexible_cms:
+        languages:
+            default: de
+            available: en,de
+
+    phlexible_message:
+        use_log_handler: false
+        audit_entities: false
+
+    phlexible_meta_set:
+        languages:
+            default: de
+            available: en,de
+
+    phlexible_media_cache:
+        storages:
+            default:
+                id: phlexible_media_cache.storage.local
+                options:
+                    storage_dir: %media_cache_storage_dir%
+
+    phlexible_media_site:
+        sites:
+            default:
+                id: 492d88c5-dd48-4d73-b849-1cacc0a80056 # this has to be a generated id
+                root_dir: %media_manager_root_dir%
+                quota: 1000000000
+                driver: phlexible_media_manager.site_default
+
+    phlexible_siteroot:
+        overrides:
+            48ef589f-2ddc-4cb6-9a54-7e0dc0a8005b:
+                navigation:
+                    0:
+                        url: project.dev
+                        path: ~
+                        language: ~
+                        default: 1
+                        type: element
+                        target: 1062
+
+    phlexible_media_tool:
+        swftools:
+            pdf2swf: %tool_pdf2swf%
+            swfdump: %tool_swfdump%
+            swfcombine: %tool_swfcombine%
+
+        pdftotext:
+            pdftotext: %tool_pdftotext%
+            pdfinfo: %tool_pdfinfo%
+
+        mime:
+            file: %tool_file%
+
+        imagemagick:
+            identify: %tool_identify%
+            convert: %tool_convert%
+            mogrify: %tool_mogrify%
+
+        ffmpeg:
+            ffprobe: %tool_ffprobe%
+            ffmpeg: %tool_ffmpeg%~
+
+And in to enable database profiling in dev environment add the following in ``app/config/config_dev.yml``:
+
+.. code-block:: yaml
+
+    phlexible_gui:
+        database:
+            profiler: true
+
+Parameters
+~~~~~~~~~~
+
+As you can see in the previous section, there are some parameters to be set.
+Open ``app/config/parameters.yml`` and set the following values:
+
+.. code-block:: yaml
+
+    tool_identify: /path/to/identify
+    tool_convert: /path/to/convert
+    tool_mogrify: /path/to/mogrify
+    tool_ffprobe: /path/to/ffprobe
+    tool_ffmpeg: /path/to/ffmpeg
+    tool_pdf2swf: /path/to/pdf2swf
+    tool_swfdump: /path/to/swfdump
+    tool_swfcombine: /path/to/swfcombine
+    tool_pdftotext: /path/to/pdftotext
+    tool_pdfinfo: /path/to/pdfinfo
+    tool_file: /path/to/file
+    media_manager_root_dir: /path/to/project/media/files/
+    media_cache_storage_dir: /path/to/project/media/frames/
+
+Routing
+~~~~~~~
+
+To make the backend routes available, you have to add a resource to ``app/config/routing.yml``:
+
+.. code-block:: yaml
+
+    admin:
+        resource: admin_routing.yml
+        prefix:   /admin
+
+After that, you have to add a new file ``app/config/admin_routing.yml`` and add the following lines:
+
+.. code-block:: yaml
+
+    phlexible_accesscontrol:
+        resource: "@PhlexibleAccessControlBundle/Controller/"
+        type:     annotation
+
+    phlexible_cache:
+        resource: "@PhlexibleCacheBundle/Controller/"
+        type:     annotation
+
+    phlexible_contentchannels:
+        resource: "@PhlexibleContentchannelBundle/Controller/"
+        type:     annotation
+
+    phlexible_dashboard:
+        resource: "@PhlexibleDashboardBundle/Controller/"
+        type:     annotation
+
+    phlexible_datasources:
+        resource: "@PhlexibleDataSourceBundle/Controller/"
+        type:     annotation
+
+    phlexible_documenttypes:
+        resource: "@PhlexibleDocumenttypeBundle/Controller/"
+        type:     annotation
+
+    phlexible_elements:
+        resource: "@PhlexibleElementBundle/Controller/"
+        type:     annotation
+
+    phlexible_elementtypes:
+        resource: "@PhlexibleElementtypeBundle/Controller/"
+        type:     annotation
+
+    phlexible_frontend_preview:
+        resource: "@PhlexibleFrontendBundle/Controller/PreviewController.php"
+        type:     annotation
+
+    phlexible_frontendmedia_folder:
+        resource: "@PhlexibleFrontendMediaBundle/Controller/FolderController.php"
+        type:     annotation
+
+    phlexible_gui:
+        resource: "@PhlexibleGuiBundle/Controller/"
+        type:     annotation
+
+    phlexible_mediamanager:
+        resource: "@PhlexibleMediaManagerBundle/Controller/"
+        type:     annotation
+
+    phlexible_mediatemplates:
+        resource: "@PhlexibleMediaTemplateBundle/Controller/"
+        type:     annotation
+
+    phlexible_messages:
+        resource: "@PhlexibleMessageBundle/Controller/"
+        type:     annotation
+
+    phlexible_metasets:
+        resource: "@PhlexibleMetaSetBundle/Controller/"
+        type:     annotation
+
+    phlexible_problems:
+        resource: "@PhlexibleProblemBundle/Controller/"
+        type:     annotation
+
+    phlexible_queue:
+        resource: "@PhlexibleQueueBundle/Controller/"
+        type:     annotation
+
+    phlexible_search:
+        resource: "@PhlexibleSearchBundle/Controller/"
+        type:     annotation
+
+    phlexible_security:
+        resource: "@PhlexibleSecurityBundle/Controller/"
+        type:     annotation
+
+    phlexible_siteroots:
+        resource: "@PhlexibleSiterootBundle/Controller/"
+        type:     annotation
+
+    phlexible_tasks:
+        resource: "@PhlexibleTaskBundle/Controller/"
+        type:     annotation
+
+    phlexible_teasers_catch:
+        resource: "@PhlexibleTeaserBundle/Controller/CatchController.php"
+        type:     annotation
+
+    phlexible_teasers_layout:
+        resource: "@PhlexibleTeaserBundle/Controller/LayoutController.php"
+        type:     annotation
+
+    phlexible_templates:
+        resource: "@PhlexibleTemplateBundle/Controller/"
+        type:     annotation
+
+    phlexible_translations:
+        resource: "@PhlexibleTranslationBundle/Controller/"
+        type:     annotation
+
+    phlexible_tree:
+        resource: "@PhlexibleTreeBundle/Controller/"
+        type:     annotation
+
+    phlexible_users:
+        resource: "@PhlexibleUserBundle/Controller/"
+        type:     annotation
+
+Security
+~~~~~~~~
+
+Add a new provider, encoder and firewall configuration to ``app/config/security.yml``:
+
+.. code-block:: yaml
+
+    providers:
+        ...
+
+        phlexible_user:
+            id: phlexible_user.user_manager
+
+    encoders:
+        ...
+
+        Phlexible\Bundle\UserBundle\Entity\User:
+            algorithm: md5
+            encode_as_base64: false
+            iterations: 1
+
+    firewalls:
+        ...
+
+        phlexible_login:
+            pattern:   ^/admin/login$
+            anonymous: true
+
+        phlexible:
+            pattern:    ^/admin
+            form_login:
+                provider:      phlexible_user
+                csrf_provider: form.csrf_provider
+                login_path:    security_login
+                check_path:    security_check
+            logout:
+                path:     security_logout
+                target:   /
+            anonymous:    true
+            switch_user:
+                role:     users_impersonate
+            remember_me:
+                key:      %secret%
+                lifetime: 604800
+                path:     /
+                domain:   ~
+
+Change
 
 .. _`http://symfony.com/doc/current/book/installation.html`: http://symfony.com/doc/current/book/installation.html
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
