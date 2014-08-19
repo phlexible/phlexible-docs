@@ -45,157 +45,126 @@
 <div class="section" id="installing-and-configuring-phlexible-1-0">
 <h1>Installing and Configuring phlexible 1.0<a class="headerlink" href="#installing-and-configuring-phlexible-1-0" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this chapter is to get you up and running with a working phlexible 1.0 application
-built on top of Symfony.</p>
-<div class="section" id="installing-a-symfony2-distribution">
-<h2>Installing a Symfony2 Distribution<a class="headerlink" href="#installing-a-symfony2-distribution" title="Permalink to this headline">¶</a></h2>
+built on top of Symfony2.</p>
+<div class="section" id="installing-phlexible-1-0">
+<h2>Installing phlexible 1.0<a class="headerlink" href="#installing-phlexible-1-0" title="Permalink to this headline">¶</a></h2>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">First, check that you have installed and configured a Web server (such
-as Apache) with PHP. For more information on Symfony2 requirements, see the
-<tt class="xref doc docutils literal"><span class="pre">requirements</span> <span class="pre">reference</span></tt>.</p>
+<p class="last">First, check that you have installed the Symfony2 Standard Distribution. See
+<a class="reference external" href="http://symfony.com/doc/current/book/installation.html">http://symfony.com/doc/current/book/installation.html</a> for details.</p>
 </div>
-<p>Symfony2 packages &#8220;distributions&#8221;, which are fully-functional applications
-that include the Symfony2 core libraries, a selection of useful bundles, a
-sensible directory structure and some default configuration. When you download
-a Symfony2 distribution, you&#8217;re downloading a functional application skeleton
-that can be used immediately to begin developing your application.</p>
-<p>Start by visiting the Symfony2 download page at <a class="reference external" href="http://symfony.com/download">http://symfony.com/download</a>.
-On this page, you&#8217;ll see the <em>Symfony Standard Edition</em>, which is the main
-Symfony2 distribution. There are 2 ways to get your project started:</p>
-<div class="section" id="option-1-composer">
-<h3>Option 1) Composer<a class="headerlink" href="#option-1-composer" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="http://getcomposer.org/">Composer</a> is a dependency management library for PHP, which you can use
-to download the Symfony2 Standard Edition.</p>
-<p>Start by <a class="reference external" href="http://getcomposer.org/download/">downloading Composer</a> anywhere onto your local computer. If you
-have curl installed, it&#8217;s as easy as:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>curl -s https://getcomposer.org/installer | php
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If your computer is not ready to use Composer, you&#8217;ll see some recommendations
-when running this command. Follow those recommendations to get Composer
-working properly.</p>
-</div>
-<p>Composer is an executable PHAR file, which you can use to download the Standard
-Distribution:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony <span class="s1">&#39;2.5.*&#39;</span>
-</pre></div>
-</div>
-<div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">To download the vendor files faster, add the <tt class="docutils literal"><span class="pre">--prefer-dist</span></tt> option at
-the end of any Composer command.</p>
-</div>
-<p>This command may take several minutes to run as Composer downloads the Standard
-Distribution along with all of the vendor libraries that it needs. When it finishes,
-you should have a directory that looks something like this:</p>
-<div class="highlight-text"><div class="highlight"><pre>path/to/webroot/ &lt;- your web server directory (sometimes named htdocs or public)
-    Symfony/ &lt;- the new directory
-        app/
-            cache/
-            config/
-            logs/
-        src/
-            ...
-        vendor/
-            ...
-        web/
-            app.php
-            ...
+<p>After Symfony2 is installed, you can add phlexible 1.0 by adding several bundles to your <tt class="docutils literal"><span class="pre">composer.json</span></tt> file.</p>
+<div class="section" id="step-1-add-composer-repository">
+<h3>Step 1: Add Composer repository<a class="headerlink" href="#step-1-add-composer-repository" title="Permalink to this headline">¶</a></h3>
+<p>Before you can use the phlexible package or any of its bundles, you have to add
+the <a class="reference external" href="https://packages.brainbits.net/phlexible-bundles/">phlexible Composer Repository</a>. Paste the following into your <tt class="docutils literal"><span class="pre">composer.json</span></tt>:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;repositories&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;composer&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://packages.brainbits.net/phlexible-bundles/&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="option-2-download-an-archive">
-<h3>Option 2) Download an Archive<a class="headerlink" href="#option-2-download-an-archive" title="Permalink to this headline">¶</a></h3>
-<p>You can also download an archive of the Standard Edition. Here, you&#8217;ll
-need to make two choices:</p>
-<ul class="simple">
-<li>Download either a <tt class="docutils literal"><span class="pre">.tgz</span></tt> or <tt class="docutils literal"><span class="pre">.zip</span></tt> archive - both are equivalent, download
-whatever you&#8217;re more comfortable using;</li>
-<li>Download the distribution with or without vendors. If you&#8217;re planning on
-using more third-party libraries or bundles and managing them via Composer,
-you should probably download &#8220;without vendors&#8221;.</li>
-</ul>
-<p>Download one of the archives somewhere under your local web server&#8217;s root
-directory and unpack it. From a UNIX command line, this can be done with
-one of the following commands (replacing <tt class="docutils literal"><span class="pre">###</span></tt> with your actual filename):</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># for .tgz file</span>
-<span class="nv">$ </span>tar zxvf Symfony_Standard_Vendors_2.5.###.tgz
+<div class="section" id="step-2-adding-libraries">
+<h3>Step 2: Adding libraries<a class="headerlink" href="#step-2-adding-libraries" title="Permalink to this headline">¶</a></h3>
+<p>phlexible 1.0 itself is a library and depends on a number of external libraries which you have to add
+before you can start. Open your <tt class="docutils literal"><span class="pre">composer.json</span></tt> and add the following:</p>
+<div class="highlight-json"><div class="highlight"><pre>{
+    ...,
+    &quot;require&quot;: {
+        ...,
 
-<span class="c"># for a .zip file</span>
-<span class="nv">$ </span>unzip Symfony_Standard_Vendors_2.5.###.zip
-</pre></div>
-</div>
-<p>If you&#8217;ve downloaded &#8220;without vendors&#8221;, you&#8217;ll definitely need to read the
-next section.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can easily override the default directory structure. See
-<tt class="xref doc docutils literal"><span class="pre">/cookbook/configuration/override_dir_structure</span></tt> for more
-information.</p>
-</div>
-<p>All public files and the front controller that handles incoming requests in
-a Symfony2 application live in the <tt class="docutils literal"><span class="pre">Symfony/web/</span></tt> directory. So, assuming
-you unpacked the archive into your web server&#8217;s or virtual host&#8217;s document root,
-your application&#8217;s URLs will start with <tt class="docutils literal"><span class="pre">http://localhost/Symfony/web/</span></tt>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The following examples assume you don&#8217;t touch the document root settings
-so all URLs start with <tt class="docutils literal"><span class="pre">http://localhost/Symfony/web/</span></tt></p>
-</div>
-</div>
-<div class="section" id="updating-vendors">
-<span id="installation-updating-vendors"></span><h3>Updating Vendors<a class="headerlink" href="#updating-vendors" title="Permalink to this headline">¶</a></h3>
-<p>At this point, you&#8217;ve downloaded a fully-functional Symfony project in which
-you&#8217;ll start to develop your own application. A Symfony project depends on
-a number of external libraries. These are downloaded into the <tt class="docutils literal"><span class="pre">vendor/</span></tt> directory
-of your project via a library called <a class="reference external" href="http://getcomposer.org/">Composer</a>.</p>
-<p>Depending on how you downloaded Symfony, you may or may not need to update
-your vendors right now. But, updating your vendors is always safe, and guarantees
-that you have all the vendor libraries you need.</p>
-<p>Step 1: Get <a class="reference external" href="http://getcomposer.org/">Composer</a> (The great new PHP packaging system)</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>curl -s http://getcomposer.org/installer | php
-</pre></div>
-</div>
-<p>Make sure you download <tt class="docutils literal"><span class="pre">composer.phar</span></tt> in the same folder where
-the <tt class="docutils literal"><span class="pre">composer.json</span></tt> file is located (this is your Symfony project
-root by default).</p>
-<p>Step 2: Install vendors</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>php composer.phar install
-</pre></div>
-</div>
-<p>This command downloads all of the necessary vendor libraries - including
-Symfony itself - into the <tt class="docutils literal"><span class="pre">vendor/</span></tt> directory.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>If you don&#8217;t have <tt class="docutils literal"><span class="pre">curl</span></tt> installed, you can also just download the <tt class="docutils literal"><span class="pre">installer</span></tt>
-file manually at <a class="reference external" href="http://getcomposer.org/installer">http://getcomposer.org/installer</a>. Place this file into your
-project and then run:</p>
-<div class="last highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>php installer
-<span class="nv">$ </span>php composer.phar install
-</pre></div>
-</div>
-</div>
-<div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>When running <tt class="docutils literal"><span class="pre">php</span> <span class="pre">composer.phar</span> <span class="pre">install</span></tt> or <tt class="docutils literal"><span class="pre">php</span> <span class="pre">composer.phar</span> <span class="pre">update</span></tt>,
-Composer will execute post install/update commands to clear the cache
-and install assets. By default, the assets will be copied into your <tt class="docutils literal"><span class="pre">web</span></tt>
-directory.</p>
-<p>Instead of copying your Symfony assets, you can create symlinks if
-your operating system supports it. To create symlinks, add an entry
-in the <tt class="docutils literal"><span class="pre">extra</span></tt> node of your composer.json file with the key
-<tt class="docutils literal"><span class="pre">symfony-assets-install</span></tt> and the value <tt class="docutils literal"><span class="pre">symlink</span></tt>:</p>
-<div class="highlight-json"><div class="highlight"><pre>&quot;extra&quot;: {
-    &quot;symfony-app-dir&quot;: &quot;app&quot;,
-    &quot;symfony-web-dir&quot;: &quot;web&quot;,
-    &quot;symfony-assets-install&quot;: &quot;symlink&quot;
+        &quot;nelmio/api-doc-bundle&quot;: &quot;~2.5&quot;,
+        &quot;alchemy/zippy&quot;: &quot;~0.2&quot;,
+        &quot;jms/cg&quot;: &quot;dev-master&quot;,
+        &quot;cocur/slugify&quot;: &quot;~0.8&quot;,
+        &quot;phansys/getid3&quot;: &quot;v2.0.0-BETA1&quot;,
+
+        &quot;phlexible/phlexible&quot;: &quot;dev-master&quot;,
+        &quot;brainbits/toolkit&quot;: &quot;dev-master&quot;
+    }
 }
 </pre></div>
 </div>
-<p class="last">When passing <tt class="docutils literal"><span class="pre">relative</span></tt> instead of <tt class="docutils literal"><span class="pre">symlink</span></tt> to symfony-assets-install,
-the command will generate relative symlinks.</p>
+</div>
+<div class="section" id="step-3-updating-vendors">
+<h3>Step 3: Updating Vendors<a class="headerlink" href="#step-3-updating-vendors" title="Permalink to this headline">¶</a></h3>
+<p>To download all necassary libraries - including phlexible itself - you have to update your vendors.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>php composer.phar update
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-4-enable-phlexible">
+<h3>Step 4: Enable phlexible<a class="headerlink" href="#step-4-enable-phlexible" title="Permalink to this headline">¶</a></h3>
+<p>At this point, the necassary bundles are installed in your <tt class="docutils literal"><span class="pre">vendor/</span></tt> directory and
+the autoloader recognizes its classes. The only thing you need to do now is register
+the needed bundles in <tt class="docutils literal"><span class="pre">AppKernel</span></tt>:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="c1">// app/AppKernel.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">AppKernel</span> <span class="k">extends</span> <span class="nx">Kernel</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">registerBundles</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$bundles</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// ...,</span>
+
+            <span class="k">new</span> <span class="nx">Igorw\FileServeBundle\IgorwFileServeBundle</span><span class="p">(),</span>
+
+            <span class="k">new</span> <span class="nx">Nelmio\ApiDocBundle\NelmioApiDocBundle</span><span class="p">(),</span>
+
+            <span class="k">new</span> <span class="nx">Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle</span><span class="p">(),</span>
+
+            <span class="c1">// phlexible.core</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\GuiBundle\PhlexibleGuiBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\SecurityBundle\PhlexibleSecurityBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MessageBundle\PhlexibleMessageBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\QueueBundle\PhlexibleQueueBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\UserBundle\PhlexibleUserBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\ProblemBundle\PhlexibleProblemBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\CacheBundle\PhlexibleCacheBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\DashboardBundle\PhlexibleDashboardBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\SearchBundle\PhlexibleSearchBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\AccessControlBundle\PhlexibleAccessControlBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\DataSourceBundle\PhlexibleDataSourceBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\TemplateBundle\PhlexibleTemplateBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\TranslationBundle\PhlexibleTranslationBundle</span><span class="p">(),</span>
+
+            <span class="c1">// phlexible.media</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MediaAssetBundle\PhlexibleMediaAssetBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MediaExtractorBundle\PhlexibleMediaExtractorBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MediaTemplateBundle\PhlexibleMediaTemplateBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MediaCacheBundle\PhlexibleMediaCacheBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MediaSiteBundle\PhlexibleMediaSiteBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MediaManagerBundle\PhlexibleMediaManagerBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\DocumenttypeBundle\PhlexibleDocumenttypeBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MetaSetBundle\PhlexibleMetaSetBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\MediaToolBundle\PhlexibleMediaToolBundle</span><span class="p">(),</span>
+
+            <span class="c1">// phlexible.cms</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\CmsBundle\PhlexibleCmsBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\SiterootBundle\PhlexibleSiterootBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\ContentchannelBundle\PhlexibleContentchannelBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\ElementtypeBundle\PhlexibleElementtypeBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\ElementBundle\PhlexibleElementBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\TeaserBundle\PhlexibleTeaserBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\TreeBundle\PhlexibleTreeBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\FrontendBundle\PhlexibleFrontendBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\FrontendAssetBundle\PhlexibleFrontendAssetBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\TaskBundle\PhlexibleTaskBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">Phlexible\Bundle\TwigRendererBundle\PhlexibleTwigRendererBundle</span><span class="p">(),</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="configuration-and-setup">
@@ -203,127 +172,6 @@ the command will generate relative symlinks.</p>
 <p>At this point, all of the needed third-party libraries now live in the <tt class="docutils literal"><span class="pre">vendor/</span></tt>
 directory. You also have a default application setup in <tt class="docutils literal"><span class="pre">app/</span></tt> and some
 sample code inside the <tt class="docutils literal"><span class="pre">src/</span></tt> directory.</p>
-<p>Symfony2 comes with a visual server configuration tester to help make sure
-your Web server and PHP are configured to use Symfony. Use the following URL
-to check your configuration:</p>
-<div class="highlight-text"><div class="highlight"><pre>http://localhost/config.php
-</pre></div>
-</div>
-<p>If there are any issues, correct them now before moving on.</p>
-<div class="sidebar" id="book-installation-permissions">
-<p class="first sidebar-title">Setting up Permissions</p>
-<p>One common issue is that the <tt class="docutils literal"><span class="pre">app/cache</span></tt> and <tt class="docutils literal"><span class="pre">app/logs</span></tt> directories
-must be writable both by the web server and the command line user. On
-a UNIX system, if your web server user is different from your command
-line user, you can run the following commands just once in your project
-to ensure that permissions will be setup properly.</p>
-<p><strong>1. Using ACL on a system that supports chmod +a</strong></p>
-<p>Many systems allow you to use the <tt class="docutils literal"><span class="pre">chmod</span> <span class="pre">+a</span></tt> command. Try this first,
-and if you get an error - try the next method. This uses a command to
-try to determine your web server user and set it as <tt class="docutils literal"><span class="pre">HTTPDUSER</span></tt>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>rm -rf app/cache/*
-<span class="nv">$ </span>rm -rf app/logs/*
-
-<span class="nv">$ HTTPDUSER</span><span class="o">=</span><span class="sb">`</span>ps aux | grep -E <span class="s1">&#39;[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx&#39;</span> | grep -v root | head -1 | cut -d<span class="se">\ </span> -f1<span class="sb">`</span>
-<span class="nv">$ </span>sudo chmod +a <span class="s2">&quot;$HTTPDUSER allow delete,write,append,file_inherit,directory_inherit&quot;</span> app/cache app/logs
-<span class="nv">$ </span>sudo chmod +a <span class="s2">&quot;`whoami` allow delete,write,append,file_inherit,directory_inherit&quot;</span> app/cache app/logs
-</pre></div>
-</div>
-<p><strong>2. Using ACL on a system that does not support chmod +a</strong></p>
-<p>Some systems don&#8217;t support <tt class="docutils literal"><span class="pre">chmod</span> <span class="pre">+a</span></tt>, but do support another utility
-called <tt class="docutils literal"><span class="pre">setfacl</span></tt>. You may need to <a class="reference external" href="https://help.ubuntu.com/community/FilePermissionsACLs">enable ACL support</a> on your partition
-and install setfacl before using it (as is the case with Ubuntu). This
-uses a command to try to determine your web server user and set it as
-<tt class="docutils literal"><span class="pre">HTTPDUSER</span></tt>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ HTTPDUSER</span><span class="o">=</span><span class="sb">`</span>ps aux | grep -E <span class="s1">&#39;[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx&#39;</span> | grep -v root | head -1 | cut -d<span class="se">\ </span> -f1<span class="sb">`</span>
-<span class="nv">$ </span>sudo setfacl -R -m u:<span class="s2">&quot;$HTTPDUSER&quot;</span>:rwX -m u:<span class="sb">`</span>whoami<span class="sb">`</span>:rwX app/cache app/logs
-<span class="nv">$ </span>sudo setfacl -dR -m u:<span class="s2">&quot;$HTTPDUSER&quot;</span>:rwX -m u:<span class="sb">`</span>whoami<span class="sb">`</span>:rwX app/cache app/logs
-</pre></div>
-</div>
-<p>If this doesn&#8217;t work, try adding <tt class="docutils literal"><span class="pre">-n</span></tt> option.</p>
-<p><strong>3. Without using ACL</strong></p>
-<p>If you don&#8217;t have access to changing the ACL of the directories, you will
-need to change the umask so that the cache and log directories will
-be group-writable or world-writable (depending if the web server user
-and the command line user are in the same group or not). To achieve
-this, put the following line at the beginning of the <tt class="docutils literal"><span class="pre">app/console</span></tt>,
-<tt class="docutils literal"><span class="pre">web/app.php</span></tt> and <tt class="docutils literal"><span class="pre">web/app_dev.php</span></tt> files:</p>
-<div class="highlight-python"><div class="highlight"><pre>umask(0002); // This will let the permissions be 0775
-
-// or
-
-umask(0000); // This will let the permissions be 0777
-</pre></div>
-</div>
-<p>Note that using the ACL is recommended when you have access to them
-on your server because changing the umask is not thread-safe.</p>
-<p><strong>4. Use the same user for the CLI and the web server</strong></p>
-<p class="last">In development environments, it is a common practice to use the same unix
-user for the CLI and the web server because it avoids any of these permissions
-issues when setting up new projects. This can be done by editing your web server
-configuration (e.g. commonly httpd.conf or apache2.conf for Apache) and setting
-its user to be the same as your CLI user (e.g. for Apache, update the User
-and Group values).</p>
-</div>
-<p>When everything is fine, click on &#8220;Go to the Welcome page&#8221; to request your
-first &#8220;real&#8221; Symfony2 webpage:</p>
-<div class="highlight-text"><div class="highlight"><pre>http://localhost/app_dev.php/
-</pre></div>
-</div>
-<p>Symfony2 should welcome and congratulate you for your hard work so far!</p>
-<img alt="images/quick_tour/welcome.png" src="images/quick_tour/welcome.png" />
-<div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">To get nice and short urls you should point the document root of your
-webserver or virtual host to the <tt class="docutils literal"><span class="pre">Symfony/web/</span></tt> directory. Though
-this is not required for development it is recommended at the time your
-application goes into production as all system and configuration files
-become inaccessible to clients then. For information on configuring
-your specific web server document root, read
-<tt class="xref doc docutils literal"><span class="pre">/cookbook/configuration/web_server_configuration</span></tt>
-or consult the official documentation of your webserver:
-<a class="reference external" href="http://httpd.apache.org/docs/current/mod/core.html#documentroot">Apache</a> | <a class="reference external" href="http://wiki.nginx.org/Symfony">Nginx</a> .</p>
-</div>
-</div>
-</div>
-<div class="section" id="beginning-development">
-<h2>Beginning Development<a class="headerlink" href="#beginning-development" title="Permalink to this headline">¶</a></h2>
-<p>Now that you have a fully-functional Symfony2 application, you can begin
-development! Your distribution may contain some sample code - check the
-<tt class="docutils literal"><span class="pre">README.md</span></tt> file included with the distribution (open it as a text file)
-to learn about what sample code was included with your distribution.</p>
-<p>If you&#8217;re new to Symfony, check out &#8220;<tt class="xref doc docutils literal"><span class="pre">page_creation</span></tt>&#8221;, where you&#8217;ll
-learn how to create pages, change configuration, and do everything else you&#8217;ll
-need in your new application.</p>
-<p>Be sure to also check out the <tt class="xref doc docutils literal"><span class="pre">Cookbook</span></tt>, which contains
-a wide variety of articles about solving specific problems with Symfony.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you want to remove the sample code from your distribution, take a look
-at this cookbook article: &#8220;<tt class="xref doc docutils literal"><span class="pre">/cookbook/bundles/remove</span></tt>&#8220;</p>
-</div>
-</div>
-<div class="section" id="using-source-control">
-<h2>Using Source Control<a class="headerlink" href="#using-source-control" title="Permalink to this headline">¶</a></h2>
-<p>If you&#8217;re using a version control system like <tt class="docutils literal"><span class="pre">Git</span></tt> or <tt class="docutils literal"><span class="pre">Subversion</span></tt>, you
-can setup your version control system and begin committing your project to
-it as normal. The Symfony Standard Edition <em>is</em> the starting point for your
-new project.</p>
-<p>For specific instructions on how best to setup your project to be stored
-in Git, see <tt class="xref doc docutils literal"><span class="pre">/cookbook/workflow/new_project_git</span></tt>.</p>
-<div class="section" id="ignoring-the-vendor-directory">
-<h3>Ignoring the <tt class="docutils literal"><span class="pre">vendor/</span></tt> Directory<a class="headerlink" href="#ignoring-the-vendor-directory" title="Permalink to this headline">¶</a></h3>
-<p>If you&#8217;ve downloaded the archive <em>without vendors</em>, you can safely ignore
-the entire <tt class="docutils literal"><span class="pre">vendor/</span></tt> directory and not commit it to source control. With
-<tt class="docutils literal"><span class="pre">Git</span></tt>, this is done by creating and adding the following to a <tt class="docutils literal"><span class="pre">.gitignore</span></tt>
-file:</p>
-<div class="highlight-text"><div class="highlight"><pre>/vendor/
-</pre></div>
-</div>
-<p>Now, the vendor directory won&#8217;t be committed to source control. This is fine
-(actually, it&#8217;s great!) because when someone else clones or checks out the
-project, they can simply run the <tt class="docutils literal"><span class="pre">php</span> <span class="pre">composer.phar</span> <span class="pre">install</span></tt> script to
-install all the necessary project dependencies.</p>
 </div>
 </div>
 </div>
@@ -337,16 +185,12 @@ install all the necessary project dependencies.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installing and Configuring phlexible 1.0</a><ul>
-<li><a class="reference internal" href="#installing-a-symfony2-distribution">Installing a Symfony2 Distribution</a><ul>
-<li><a class="reference internal" href="#option-1-composer">Option 1) Composer</a></li>
-<li><a class="reference internal" href="#option-2-download-an-archive">Option 2) Download an Archive</a></li>
-<li><a class="reference internal" href="#updating-vendors">Updating Vendors</a></li>
+<li><a class="reference internal" href="#installing-phlexible-1-0">Installing phlexible 1.0</a><ul>
+<li><a class="reference internal" href="#step-1-add-composer-repository">Step 1: Add Composer repository</a></li>
+<li><a class="reference internal" href="#step-2-adding-libraries">Step 2: Adding libraries</a></li>
+<li><a class="reference internal" href="#step-3-updating-vendors">Step 3: Updating Vendors</a></li>
+<li><a class="reference internal" href="#step-4-enable-phlexible">Step 4: Enable phlexible</a></li>
 <li><a class="reference internal" href="#configuration-and-setup">Configuration and Setup</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#beginning-development">Beginning Development</a></li>
-<li><a class="reference internal" href="#using-source-control">Using Source Control</a><ul>
-<li><a class="reference internal" href="#ignoring-the-vendor-directory">Ignoring the <tt class="docutils literal"><span class="pre">vendor/</span></tt> Directory</a></li>
 </ul>
 </li>
 </ul>
@@ -385,7 +229,7 @@ install all the necessary project dependencies.</p>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, Matthias Harmuth.
+        &copy; Copyright 2014, brainbits GmbH.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>

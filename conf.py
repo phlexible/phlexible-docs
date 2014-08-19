@@ -20,6 +20,12 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
+sys.path.append(os.path.abspath('_exts'))
+
+# adding PhpLexer
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -32,6 +38,9 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.todo',
+    'sensio.sphinx.refinclude',
+    'sensio.sphinx.configurationblock',
+    'sensio.sphinx.phpcode'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -48,7 +57,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'phlexible Documentation'
-copyright = u'2014, Matthias Harmuth'
+copyright = u'2014, brainbits GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -96,6 +105,14 @@ pygments_style = 'sphinx'
 
 # If true, keep warnings as "system message" paragraphs in the built documents.
 #keep_warnings = False
+
+# enable highlighting for PHP code not between ``<?php ... ?>`` by default
+lexers['php'] = PhpLexer(startinline=True)
+lexers['php-annotations'] = PhpLexer(startinline=True)
+lexers['php-standalone'] = PhpLexer(startinline=True)
+
+# use PHP as the primary domain
+primary_domain = 'php'
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -180,7 +197,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'phlexibleDocumentationdoc'
+htmlhelp_basename = 'phlexibleDocumentation'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -260,3 +277,6 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# Use PHP syntax highlighting in code examples by default
+highlight_language='php'

@@ -5,189 +5,137 @@ Installing and Configuring phlexible 1.0
 ========================================
 
 The goal of this chapter is to get you up and running with a working phlexible 1.0 application
-built on top of Symfony.
+built on top of Symfony2.
 
 
-Installing a Symfony2 Distribution
-----------------------------------
-
+Installing phlexible 1.0
+------------------------
 .. tip::
 
-    First, check that you have installed and configured a Web server (such
-    as Apache) with PHP. For more information on Symfony2 requirements, see the
-    :doc:`requirements reference </reference/requirements>`.
+    First, check that you have installed the Symfony2 Standard Distribution. See
+    `http://symfony.com/doc/current/book/installation.html`_ for details.
 
-Symfony2 packages "distributions", which are fully-functional applications
-that include the Symfony2 core libraries, a selection of useful bundles, a
-sensible directory structure and some default configuration. When you download
-a Symfony2 distribution, you're downloading a functional application skeleton
-that can be used immediately to begin developing your application.
+After Symfony2 is installed, you can add phlexible 1.0 by adding several bundles to your ``composer.json`` file.
 
-Start by visiting the Symfony2 download page at `http://symfony.com/download`_.
-On this page, you'll see the *Symfony Standard Edition*, which is the main
-Symfony2 distribution. There are 2 ways to get your project started:
+Step 1: Add Composer repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Option 1) Composer
-~~~~~~~~~~~~~~~~~~
+Before you can use the phlexible package or any of its bundles, you have to add
+the `phlexible Composer Repository`_. Paste the following into your ``composer.json``:
 
-`Composer`_ is a dependency management library for PHP, which you can use
-to download the Symfony2 Standard Edition.
+.. code-block:: json
 
-Start by `downloading Composer`_ anywhere onto your local computer. If you
-have curl installed, it's as easy as:
+    {
+        "repositories": [
+            {
+                "type": "composer",
+                "url": "https://packages.brainbits.net/phlexible-bundles/"
+            }
+        ]
+    }
 
-.. code-block:: bash
+Step 2: Adding libraries
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-    $ curl -s https://getcomposer.org/installer | php
+phlexible 1.0 itself is a library and depends on a number of external libraries which you have to add
+before you can start. Open your ``composer.json`` and add the following:
 
-.. note::
+.. code-block:: json
 
-    If your computer is not ready to use Composer, you'll see some recommendations
-    when running this command. Follow those recommendations to get Composer
-    working properly.
+    {
+        ...,
+        "require": {
+            ...,
 
-Composer is an executable PHAR file, which you can use to download the Standard
-Distribution:
+            "nelmio/api-doc-bundle": "~2.5",
+            "alchemy/zippy": "~0.2",
+            "jms/cg": "dev-master",
+            "cocur/slugify": "~0.8",
+            "phansys/getid3": "v2.0.0-BETA1",
 
-.. code-block:: bash
-
-    $ php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony '2.5.*'
-
-.. tip::
-
-    To download the vendor files faster, add the ``--prefer-dist`` option at
-    the end of any Composer command.
-
-This command may take several minutes to run as Composer downloads the Standard
-Distribution along with all of the vendor libraries that it needs. When it finishes,
-you should have a directory that looks something like this:
-
-.. code-block:: text
-
-    path/to/webroot/ <- your web server directory (sometimes named htdocs or public)
-        Symfony/ <- the new directory
-            app/
-                cache/
-                config/
-                logs/
-            src/
-                ...
-            vendor/
-                ...
-            web/
-                app.php
-                ...
-
-Option 2) Download an Archive
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can also download an archive of the Standard Edition. Here, you'll
-need to make two choices:
-
-* Download either a ``.tgz`` or ``.zip`` archive - both are equivalent, download
-  whatever you're more comfortable using;
-
-* Download the distribution with or without vendors. If you're planning on
-  using more third-party libraries or bundles and managing them via Composer,
-  you should probably download "without vendors".
-
-Download one of the archives somewhere under your local web server's root
-directory and unpack it. From a UNIX command line, this can be done with
-one of the following commands (replacing ``###`` with your actual filename):
-
-.. code-block:: bash
-
-    # for .tgz file
-    $ tar zxvf Symfony_Standard_Vendors_2.5.###.tgz
-
-    # for a .zip file
-    $ unzip Symfony_Standard_Vendors_2.5.###.zip
-
-If you've downloaded "without vendors", you'll definitely need to read the
-next section.
-
-.. note::
-
-    You can easily override the default directory structure. See
-    :doc:`/cookbook/configuration/override_dir_structure` for more
-    information.
-
-All public files and the front controller that handles incoming requests in
-a Symfony2 application live in the ``Symfony/web/`` directory. So, assuming
-you unpacked the archive into your web server's or virtual host's document root,
-your application's URLs will start with ``http://localhost/Symfony/web/``.
-
-.. note::
-
-    The following examples assume you don't touch the document root settings
-    so all URLs start with ``http://localhost/Symfony/web/``
-
-.. _installation-updating-vendors:
-
-Updating Vendors
-~~~~~~~~~~~~~~~~
-
-At this point, you've downloaded a fully-functional Symfony project in which
-you'll start to develop your own application. A Symfony project depends on
-a number of external libraries. These are downloaded into the ``vendor/`` directory
-of your project via a library called `Composer`_.
-
-Depending on how you downloaded Symfony, you may or may not need to update
-your vendors right now. But, updating your vendors is always safe, and guarantees
-that you have all the vendor libraries you need.
-
-Step 1: Get `Composer`_ (The great new PHP packaging system)
-
-.. code-block:: bash
-
-    $ curl -s http://getcomposer.org/installer | php
-
-Make sure you download ``composer.phar`` in the same folder where
-the ``composer.json`` file is located (this is your Symfony project
-root by default).
-
-Step 2: Install vendors
-
-.. code-block:: bash
-
-    $ php composer.phar install
-
-This command downloads all of the necessary vendor libraries - including
-Symfony itself - into the ``vendor/`` directory.
-
-.. note::
-
-    If you don't have ``curl`` installed, you can also just download the ``installer``
-    file manually at http://getcomposer.org/installer. Place this file into your
-    project and then run:
-
-    .. code-block:: bash
-
-        $ php installer
-        $ php composer.phar install
-
-.. tip::
-
-    When running ``php composer.phar install`` or ``php composer.phar update``,
-    Composer will execute post install/update commands to clear the cache
-    and install assets. By default, the assets will be copied into your ``web``
-    directory.
-
-    Instead of copying your Symfony assets, you can create symlinks if
-    your operating system supports it. To create symlinks, add an entry
-    in the ``extra`` node of your composer.json file with the key
-    ``symfony-assets-install`` and the value ``symlink``:
-
-    .. code-block:: json
-
-        "extra": {
-            "symfony-app-dir": "app",
-            "symfony-web-dir": "web",
-            "symfony-assets-install": "symlink"
+            "phlexible/phlexible": "dev-master",
+            "brainbits/toolkit": "dev-master"
         }
+    }
 
-    When passing ``relative`` instead of ``symlink`` to symfony-assets-install,
-    the command will generate relative symlinks.
+
+Step 3: Updating Vendors
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+To download all necassary libraries - including phlexible itself - you have to update your vendors.
+
+.. code-block:: bash
+
+    $ php composer.phar update
+
+Step 4: Enable phlexible
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+At this point, the necassary bundles are installed in your ``vendor/`` directory and
+the autoloader recognizes its classes. The only thing you need to do now is register
+the needed bundles in ``AppKernel``::
+
+    // app/AppKernel.php
+
+    // ...
+    class AppKernel extends Kernel
+    {
+        // ...
+
+        public function registerBundles()
+        {
+            $bundles = array(
+                // ...,
+
+                new Igorw\FileServeBundle\IgorwFileServeBundle(),
+
+                new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+
+                new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+
+                // phlexible.core
+                new Phlexible\Bundle\GuiBundle\PhlexibleGuiBundle(),
+                new Phlexible\Bundle\SecurityBundle\PhlexibleSecurityBundle(),
+                new Phlexible\Bundle\MessageBundle\PhlexibleMessageBundle(),
+                new Phlexible\Bundle\QueueBundle\PhlexibleQueueBundle(),
+                new Phlexible\Bundle\UserBundle\PhlexibleUserBundle(),
+                new Phlexible\Bundle\ProblemBundle\PhlexibleProblemBundle(),
+                new Phlexible\Bundle\CacheBundle\PhlexibleCacheBundle(),
+                new Phlexible\Bundle\DashboardBundle\PhlexibleDashboardBundle(),
+                new Phlexible\Bundle\SearchBundle\PhlexibleSearchBundle(),
+                new Phlexible\Bundle\AccessControlBundle\PhlexibleAccessControlBundle(),
+                new Phlexible\Bundle\DataSourceBundle\PhlexibleDataSourceBundle(),
+                new Phlexible\Bundle\TemplateBundle\PhlexibleTemplateBundle(),
+                new Phlexible\Bundle\TranslationBundle\PhlexibleTranslationBundle(),
+
+                // phlexible.media
+                new Phlexible\Bundle\MediaAssetBundle\PhlexibleMediaAssetBundle(),
+                new Phlexible\Bundle\MediaExtractorBundle\PhlexibleMediaExtractorBundle(),
+                new Phlexible\Bundle\MediaTemplateBundle\PhlexibleMediaTemplateBundle(),
+                new Phlexible\Bundle\MediaCacheBundle\PhlexibleMediaCacheBundle(),
+                new Phlexible\Bundle\MediaSiteBundle\PhlexibleMediaSiteBundle(),
+                new Phlexible\Bundle\MediaManagerBundle\PhlexibleMediaManagerBundle(),
+                new Phlexible\Bundle\DocumenttypeBundle\PhlexibleDocumenttypeBundle(),
+                new Phlexible\Bundle\MetaSetBundle\PhlexibleMetaSetBundle(),
+                new Phlexible\Bundle\MediaToolBundle\PhlexibleMediaToolBundle(),
+
+                // phlexible.cms
+                new Phlexible\Bundle\CmsBundle\PhlexibleCmsBundle(),
+                new Phlexible\Bundle\SiterootBundle\PhlexibleSiterootBundle(),
+                new Phlexible\Bundle\ContentchannelBundle\PhlexibleContentchannelBundle(),
+                new Phlexible\Bundle\ElementtypeBundle\PhlexibleElementtypeBundle(),
+                new Phlexible\Bundle\ElementBundle\PhlexibleElementBundle(),
+                new Phlexible\Bundle\TeaserBundle\PhlexibleTeaserBundle(),
+                new Phlexible\Bundle\TreeBundle\PhlexibleTreeBundle(),
+                new Phlexible\Bundle\FrontendBundle\PhlexibleFrontendBundle(),
+                new Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle(),
+                new Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle(),
+                new Phlexible\Bundle\FrontendAssetBundle\PhlexibleFrontendAssetBundle(),
+                new Phlexible\Bundle\TaskBundle\PhlexibleTaskBundle(),
+                new Phlexible\Bundle\TwigRendererBundle\PhlexibleTwigRendererBundle(),
+            );
+        }
+    }
 
 Configuration and Setup
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -196,162 +144,5 @@ At this point, all of the needed third-party libraries now live in the ``vendor/
 directory. You also have a default application setup in ``app/`` and some
 sample code inside the ``src/`` directory.
 
-Symfony2 comes with a visual server configuration tester to help make sure
-your Web server and PHP are configured to use Symfony. Use the following URL
-to check your configuration:
-
-.. code-block:: text
-
-    http://localhost/config.php
-
-If there are any issues, correct them now before moving on.
-
-.. _book-installation-permissions:
-
-.. sidebar:: Setting up Permissions
-
-    One common issue is that the ``app/cache`` and ``app/logs`` directories
-    must be writable both by the web server and the command line user. On
-    a UNIX system, if your web server user is different from your command
-    line user, you can run the following commands just once in your project
-    to ensure that permissions will be setup properly.
-
-    **1. Using ACL on a system that supports chmod +a**
-
-    Many systems allow you to use the ``chmod +a`` command. Try this first,
-    and if you get an error - try the next method. This uses a command to
-    try to determine your web server user and set it as ``HTTPDUSER``:
-
-    .. code-block:: bash
-
-        $ rm -rf app/cache/*
-        $ rm -rf app/logs/*
-
-        $ HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-        $ sudo chmod +a "$HTTPDUSER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
-        $ sudo chmod +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
-
-
-    **2. Using ACL on a system that does not support chmod +a**
-
-    Some systems don't support ``chmod +a``, but do support another utility
-    called ``setfacl``. You may need to `enable ACL support`_ on your partition
-    and install setfacl before using it (as is the case with Ubuntu). This
-    uses a command to try to determine your web server user and set it as
-    ``HTTPDUSER``:
-
-    .. code-block:: bash
-
-		$ HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-		$ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
-		$ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
-
-    If this doesn't work, try adding ``-n`` option.
-
-    **3. Without using ACL**
-
-    If you don't have access to changing the ACL of the directories, you will
-    need to change the umask so that the cache and log directories will
-    be group-writable or world-writable (depending if the web server user
-    and the command line user are in the same group or not). To achieve
-    this, put the following line at the beginning of the ``app/console``,
-    ``web/app.php`` and ``web/app_dev.php`` files::
-
-        umask(0002); // This will let the permissions be 0775
-
-        // or
-
-        umask(0000); // This will let the permissions be 0777
-
-    Note that using the ACL is recommended when you have access to them
-    on your server because changing the umask is not thread-safe.
-
-    **4. Use the same user for the CLI and the web server**
-
-    In development environments, it is a common practice to use the same unix
-    user for the CLI and the web server because it avoids any of these permissions
-    issues when setting up new projects. This can be done by editing your web server
-    configuration (e.g. commonly httpd.conf or apache2.conf for Apache) and setting
-    its user to be the same as your CLI user (e.g. for Apache, update the User
-    and Group values).
-
-When everything is fine, click on "Go to the Welcome page" to request your
-first "real" Symfony2 webpage:
-
-.. code-block:: text
-
-    http://localhost/app_dev.php/
-
-Symfony2 should welcome and congratulate you for your hard work so far!
-
-.. image:: /images/quick_tour/welcome.png
-
-.. tip::
-
-    To get nice and short urls you should point the document root of your
-    webserver or virtual host to the ``Symfony/web/`` directory. Though
-    this is not required for development it is recommended at the time your
-    application goes into production as all system and configuration files
-    become inaccessible to clients then. For information on configuring
-    your specific web server document root, read
-    :doc:`/cookbook/configuration/web_server_configuration`
-    or consult the official documentation of your webserver:
-    `Apache`_ | `Nginx`_ .
-
-Beginning Development
----------------------
-
-Now that you have a fully-functional Symfony2 application, you can begin
-development! Your distribution may contain some sample code - check the
-``README.md`` file included with the distribution (open it as a text file)
-to learn about what sample code was included with your distribution.
-
-If you're new to Symfony, check out ":doc:`page_creation`", where you'll
-learn how to create pages, change configuration, and do everything else you'll
-need in your new application.
-
-Be sure to also check out the :doc:`Cookbook </cookbook/index>`, which contains
-a wide variety of articles about solving specific problems with Symfony.
-
-.. note::
-
-    If you want to remove the sample code from your distribution, take a look
-    at this cookbook article: ":doc:`/cookbook/bundles/remove`"
-
-Using Source Control
---------------------
-
-If you're using a version control system like ``Git`` or ``Subversion``, you
-can setup your version control system and begin committing your project to
-it as normal. The Symfony Standard Edition *is* the starting point for your
-new project.
-
-For specific instructions on how best to setup your project to be stored
-in Git, see :doc:`/cookbook/workflow/new_project_git`.
-
-Ignoring the ``vendor/`` Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you've downloaded the archive *without vendors*, you can safely ignore
-the entire ``vendor/`` directory and not commit it to source control. With
-``Git``, this is done by creating and adding the following to a ``.gitignore``
-file:
-
-.. code-block:: text
-
-    /vendor/
-
-Now, the vendor directory won't be committed to source control. This is fine
-(actually, it's great!) because when someone else clones or checks out the
-project, they can simply run the ``php composer.phar install`` script to
-install all the necessary project dependencies.
-
-.. _`enable ACL support`: https://help.ubuntu.com/community/FilePermissionsACLs
-.. _`http://symfony.com/download`: http://symfony.com/download
-.. _`Git`: http://git-scm.com/
-.. _`GitHub Bootcamp`: http://help.github.com/set-up-git-redirect
-.. _`Composer`: http://getcomposer.org/
-.. _`downloading Composer`: http://getcomposer.org/download/
-.. _`Apache`: http://httpd.apache.org/docs/current/mod/core.html#documentroot
-.. _`Nginx`: http://wiki.nginx.org/Symfony
-.. _`Symfony Installation Page`:    http://symfony.com/download
+.. _`http://symfony.com/doc/current/book/installation.html`: http://symfony.com/doc/current/book/installation.html
+.. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
