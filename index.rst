@@ -1,20 +1,19 @@
-.. phlexible Documentation documentation master file, created by
-   sphinx-quickstart on Tue Aug 19 13:49:28 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to phlexible documentation!
 ===================================
 
-Contents:
+.. toctree::
+    :hidden:
+
+    changelog
+
+Book
+----
+
+Dive into phlexible 1.0:
 
 .. toctree::
-   :maxdepth: 2
+    :hidden:
 
+    book/index
 
-
-Indices and tables
-==================
-
-* :doc:`installation`
-
+.. include:: /book/map.rst.inc
