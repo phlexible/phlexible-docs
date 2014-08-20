@@ -62,7 +62,7 @@ before you can start. Open your ``composer.json`` and add the following:
 Step 3: Updating Vendors
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-To download all necassary libraries - including phlexible itself - you have to update your vendors.
+To download all necessary libraries - including phlexible itself - you have to update your vendors.
 
 .. code-block:: bash
 
@@ -457,6 +457,8 @@ phlexible 1.0 brings some database tables which you can install by executing the
     You need to be in your project root to execute the command. It's the doctrine `standard
     command for creating the database schema`_ in Symfony2.
 
+.. _docs-add-backend-user:
+
 Step 2: Add Backend User
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -500,6 +502,27 @@ can be created by executing the command:
 .. code-block:: bash
 
     $ php app/console media-manager:init
+
+Finish Installation
+-------------------
+
+When everything is configured and set up, open your browser and request the backend
+by typing in the following url:
+
+.. code-block:: text
+
+    http://project.dev/app_dev.php/admin
+
+phlexible 1.0 will prompt you for your username and password that you have set
+:ref:`earlier in the setup <docs-add-backend-user>`.
+
+Beginning Development
+---------------------
+
+Now that you have a fully-functional phlexible 1.0 application, you can begin development!
+
+Be sure to also check out the :doc:`Cookbook </cookbook/index>` which contains a wide variety
+about solving problems with phlexible 1.0.
 
 .. _`http://symfony.com/doc/current/book/installation.html`: http://symfony.com/doc/current/book/installation.html
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
