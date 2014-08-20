@@ -457,12 +457,51 @@ phlexible 1.0 brings some database tables which you can install by executing the
     You need to be in your project root to execute the command. It's the doctrine `standard
     command for creating the database schema`_ in Symfony2.
 
-Step 2: Add backend user
+Step 2: Add Backend User
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that the database is set up, you have to add a backend user and provide it with the
-necessary rights.
+Now that the database is set up, you have to add a backend user and add
+a role to this user.
+
+.. hint::
+
+    phlexible 1.0 uses the `FOSUSerBundle`_ to handle user management. If you
+    are familiar with this bundle, the user creation will be nothing special.
+
+Add user
+........
+
+.. code-block:: bash
+
+    $ php app/console fos:user:create testuser test@example.com p@ssw0rd
+
+This command adds a user with username ``testuser``, email ``test@example.com`` and
+password ``p@ssw0rd``. If any of the required arguments are not passed to the command,
+an interactive prompt will ask you to enter them.
+
+Promote User
+............
+
+To add a role to the user you just created, use the following command:
+
+.. code-block:: bash
+
+    $ php app/console fos:user:promote testuser SUPERADMIN
+
+This command promotes the user ``testuser`` with the role ``SUPERADMIN``.
+Another role you can use at this point is ``DEVELOPER``.
+
+Step 3: Add Media Root Folder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To work with the Mediamanager in phlexible, there has to be a root folder. That folder
+can be created by executing the command:
+
+.. code-block:: bash
+
+    $ php app/console media-manager:init
 
 .. _`http://symfony.com/doc/current/book/installation.html`: http://symfony.com/doc/current/book/installation.html
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
 .. _`standard command for creating the database schema`: http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema
+.. _`FOSUSerBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle
