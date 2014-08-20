@@ -1,21 +1,21 @@
 .. index::
     single: Installation
 
-Installing and Configuring phlexible 1.0
-========================================
+Installing and Configuring phlexible
+====================================
 
-The goal of this chapter is to get you up and running with a working phlexible 1.0 application
+The goal of this chapter is to get you up and running with a working phlexible application
 built on top of Symfony2.
 
 
-Installing phlexible 1.0
-------------------------
+Installing phlexible
+--------------------
 .. tip::
 
     First, check that you have installed the Symfony2 Standard Distribution. See
     `http://symfony.com/doc/current/book/installation.html`_ for details.
 
-After Symfony2 is installed, you can add phlexible 1.0 by adding several bundles to your ``composer.json`` file.
+After Symfony2 is installed, you can add phlexible by adding several bundles to your ``composer.json`` file.
 
 Step 1: Add Composer repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,7 +37,7 @@ the `phlexible Composer Repository`_. Paste the following into your ``composer.j
 Step 2: Adding libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-phlexible 1.0 itself is a library and depends on a number of external libraries which you have to add
+phlexible itself is a library and depends on a number of external libraries which you have to add
 before you can start. Open your ``composer.json`` and add the following:
 
 .. code-block:: json
@@ -143,7 +143,7 @@ Configuration
 App configuration
 ~~~~~~~~~~~~~~~~~
 
-phlexible 1.0 requires some configuration to be added to app's ``app/config/config.yml`` file:
+phlexible  requires some configuration to be added to app's ``app/config/config.yml`` file:
 
 .. code-block:: yaml
 
@@ -446,7 +446,7 @@ After you finished the general configuration, there are some further setup steps
 Step 1: Create Database Schema
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-phlexible 1.0 brings some database tables which you can install by executing the following command:
+phlexible  brings some database tables which you can install by executing the following command:
 
 .. code-block:: bash
 
@@ -467,7 +467,7 @@ a role to this user.
 
 .. hint::
 
-    phlexible 1.0 uses the `FOSUSerBundle`_ to handle user management. If you
+    phlexible  uses the `FOSUSerBundle`_ to handle user management. If you
     are familiar with this bundle, the user creation will be nothing special.
 
 Add user
@@ -513,16 +513,16 @@ by typing in the following url:
 
     http://project.dev/app_dev.php/admin
 
-phlexible 1.0 will prompt you for your username and password that you have set
+phlexible  will prompt you for your username and password that you have set
 :ref:`earlier in the setup <docs-add-backend-user>`.
 
 Beginning Development
 ---------------------
 
-Now that you have a fully-functional phlexible 1.0 application, you can begin development!
+Now that you have a fully-functional phlexible application, you can begin development!
 
 Be sure to also check out the :doc:`Cookbook </cookbook/index>` which contains a wide variety
-about solving problems with phlexible 1.0.
+about solving problems with phlexible.
 
 .. _`http://symfony.com/doc/current/book/installation.html`: http://symfony.com/doc/current/book/installation.html
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/

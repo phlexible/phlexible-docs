@@ -5,5 +5,6 @@ The Book
     :hidden:
 
     installation
+    templating
 
 .. include:: /book/map.rst.inc
