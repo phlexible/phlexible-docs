@@ -461,7 +461,7 @@ Step 2: Add backend user
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that the database is set up, you have to add a backend user and provide it with the
-necessary rights
+necessary rights.
 
 .. _`http://symfony.com/doc/current/book/installation.html`: http://symfony.com/doc/current/book/installation.html
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
