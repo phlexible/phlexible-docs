@@ -1,5 +1,5 @@
 .. index::
-single: Installation
+    single: Installation
 
 Installing and Configuring phlexible 1.0
 ========================================

@@ -9,7 +9,7 @@ Welcome to phlexible documentation!
 Book
 ----
 
-Dive into phlexible x.x:
+Dive into phlexible 1.0:
 
 .. toctree::
     :hidden:
