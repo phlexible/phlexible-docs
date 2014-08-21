@@ -1,7 +1,7 @@
 .. index::
     single: Trees
 
-Working with Trees
-==================
+Tree
+====
 
 Introduction ...

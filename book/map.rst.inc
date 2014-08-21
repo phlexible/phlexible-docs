@@ -3,3 +3,4 @@
 * :doc:`/book/media`
 * :doc:`/book/trees`
 * :doc:`/book/elements`
+* :doc:`/book/user`

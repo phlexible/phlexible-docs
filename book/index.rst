@@ -9,5 +9,6 @@ The Book
     media
     trees
     elements
+    user
 
 .. include:: /book/map.rst.inc

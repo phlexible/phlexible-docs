@@ -447,7 +447,7 @@ a role to this user.
 
 .. hint::
 
-    phlexible  uses the `FOSUSerBundle`_ to handle user management. If you
+    phlexible uses the `FOSUSerBundle`_ to handle user management. If you
     are familiar with this bundle, the user creation will be nothing special.
 
 Add user

@@ -1,7 +1,7 @@
 .. index::
     single: Elements
 
-Working with Elements
-=====================
+Elements
+========
 
 Introduction ...

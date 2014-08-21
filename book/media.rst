@@ -1,7 +1,7 @@
 .. index::
     single: Media
 
-Working with Media
-==================
+Media
+=====
 
 Introduction ...
