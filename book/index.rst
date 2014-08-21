@@ -6,5 +6,8 @@ The Book
 
     installation
     templating
+    media
+    trees
+    elements
 
 .. include:: /book/map.rst.inc
