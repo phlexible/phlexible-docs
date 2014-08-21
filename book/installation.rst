@@ -100,13 +100,10 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\QueueBundle\PhlexibleQueueBundle(),
                 new Phlexible\Bundle\UserBundle\PhlexibleUserBundle(),
                 new Phlexible\Bundle\ProblemBundle\PhlexibleProblemBundle(),
-                new Phlexible\Bundle\CacheBundle\PhlexibleCacheBundle(),
                 new Phlexible\Bundle\DashboardBundle\PhlexibleDashboardBundle(),
                 new Phlexible\Bundle\SearchBundle\PhlexibleSearchBundle(),
                 new Phlexible\Bundle\AccessControlBundle\PhlexibleAccessControlBundle(),
                 new Phlexible\Bundle\DataSourceBundle\PhlexibleDataSourceBundle(),
-                new Phlexible\Bundle\TemplateBundle\PhlexibleTemplateBundle(),
-                new Phlexible\Bundle\TranslationBundle\PhlexibleTranslationBundle(),
 
                 // phlexible.media
                 new Phlexible\Bundle\MediaAssetBundle\PhlexibleMediaAssetBundle(),
@@ -167,11 +164,6 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
         mail:
             from_name:  John Doe
             from_email: john.doe@example.com
-
-    phlexible_cache:
-        namespaces:
-            default:
-                type: Filesystem
 
     phlexible_cms:
         languages:
@@ -277,10 +269,6 @@ After that, you have to add a new file ``app/config/admin_routing.yml`` and add 
         resource: "@PhlexibleAccessControlBundle/Controller/"
         type:     annotation
 
-    phlexible_cache:
-        resource: "@PhlexibleCacheBundle/Controller/"
-        type:     annotation
-
     phlexible_contentchannels:
         resource: "@PhlexibleContentchannelBundle/Controller/"
         type:     annotation
@@ -363,14 +351,6 @@ After that, you have to add a new file ``app/config/admin_routing.yml`` and add 
 
     phlexible_teasers_layout:
         resource: "@PhlexibleTeaserBundle/Controller/LayoutController.php"
-        type:     annotation
-
-    phlexible_templates:
-        resource: "@PhlexibleTemplateBundle/Controller/"
-        type:     annotation
-
-    phlexible_translations:
-        resource: "@PhlexibleTranslationBundle/Controller/"
         type:     annotation
 
     phlexible_tree:
