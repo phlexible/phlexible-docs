@@ -17,6 +17,11 @@ If you want to contribute, you need to become familiar with the markup language
 Additionally we use [Sphinx](http://sphinx-doc.org/) to build the output (HTML, PDF, ...).
 
 Fist you have to install Sphinx. See their documentation on how to do that.
+After Sphinx is installed, you need to add "our" theme by executing:
+
+``` bash
+$ easy_install sphinx_rtd_theme
+```
 
 When you're ready, clone this repository...
 
