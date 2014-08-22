@@ -4,4 +4,5 @@
 Elements
 ========
 
-Introduction ...
+One of the most common tasks in phlexible is working with elements.
+They represent something ...

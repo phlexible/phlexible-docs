@@ -67,6 +67,7 @@ method to save your changes::
 
     // ...
 
+    // save changes
     $userManager->updateUser($user);
 
 Deleting User Object
