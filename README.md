@@ -1,7 +1,7 @@
 phlexible Documentation
 =======================
 
-This documentation is rendered online at [phlexible Documentation](https://public.brainbits.net/bamboo/browse/BB-PHLEXDOC0-13/artifact/JOB1/docs-html/index.html)
+This documentation is rendered online at [phlexible Documentation](https://public.brainbits.net/bamboo/browse/BB-PHLEXDOC0-13/artifact/JOB1/docs-html/index.html).
 
 Contributing
 ------------
