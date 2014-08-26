@@ -127,7 +127,6 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\FrontendBundle\PhlexibleFrontendBundle(),
                 new Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle(),
                 new Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle(),
-                new Phlexible\Bundle\FrontendAssetBundle\PhlexibleFrontendAssetBundle(),
                 new Phlexible\Bundle\TaskBundle\PhlexibleTaskBundle(),
                 new Phlexible\Bundle\TwigRendererBundle\PhlexibleTwigRendererBundle(),
             );
