@@ -7,7 +7,7 @@ The Book
     installation
     templating
     media
-    trees
+    tree
     elements
     user
 

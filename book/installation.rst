@@ -143,6 +143,10 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
 
 .. code-block:: yaml
 
+    # activate translator
+    framework:
+        translator: { fallback: "%locale%" }
+
     # CMF Routing Bundle
     cmf_routing: ~
 

@@ -1,6 +1,6 @@
 * :doc:`/book/installation`
 * :doc:`/book/templating`
 * :doc:`/book/media`
-* :doc:`/book/trees`
+* :doc:`/book/tree`
 * :doc:`/book/elements`
 * :doc:`/book/user`

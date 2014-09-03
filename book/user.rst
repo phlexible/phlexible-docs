@@ -45,14 +45,14 @@ user manager, you have access to all sorts of helpful methods::
 
 .. note::
 
-    Of course, you can also issue complex queries. Just use the
+    Of course, you can also issue complex queries. Use the
     Doctrine `Query Builder`_ for that.
 
 Creating/Updating User Object
 -----------------------------
 
 To create or update a user, you need to fetch (for updating) or instantiate (for creating)
-a user object and call the desired setters. After that, you can call the ``updateUser()``
+a user object and call the desired setters. After that, call the ``updateUser()``
 method to save your changes::
 
     // for editing
@@ -73,7 +73,7 @@ method to save your changes::
 Deleting User Object
 --------------------
 
-Deleting a user involves just three steps:
+Deleting a user involves three steps:
 
 #. fetching object of user that will be deleted
 #. fetching object of user that is successor
