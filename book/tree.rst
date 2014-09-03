@@ -57,4 +57,3 @@ Load the tree and "navigate" through it::
         $hasChildren = $tree->hasChildren($node);
     }
 
-Easy going, isn't it!
