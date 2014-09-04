@@ -52,7 +52,7 @@ After you created an element, save the data by doing::
 
     public function saveAction(Request $request)
     {
-        $dataSaver = $this->get('phlexible_element.data_saver');
+        $dataSaver      = $this->get('phlexible_element.data_saver');
         $elementVersion = $saver->save($request, $this->getUser());
 
         // ... return ResultResponse
