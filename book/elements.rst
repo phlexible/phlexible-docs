@@ -23,24 +23,7 @@ a new version for your element. Finally add it to the :doc:`tree </book/tree>`::
         $elementtype        = $elementService->getElementtypeService()->findElementtype($elementtypeId);
         $elementtypeVersion = $elementService->getElementtypeService()->findLatestElementtypeVersion($elementtype);
 
-        $element = new Element();
-        $element
-            ->setElementtype($elementtype)
-            ->setMasterLanguage($masterLanguage)
-            ->setLatestVersion(1)
-            ->setCreateUserId($userId)
-            ->setCreatedAt(new \DateTime());
-
-        $elementVersion = new ElementVersion();
-        $elementVersion
-            ->setVersion(1)
-            ->setElement($element)
-            ->setElementtypeVersion($elementtypeVersion->getVersion())
-            ->setCreateUserId($userId)
-            ->setCreatedAt(new \DateTime());
-
-        $elementService->updateElement($element, false);
-        $elementService->updateElementVersion($elementVersion);
+        $element = $elementService->createElement($elementtypeVersion, $masterLanguage, $userId);
 
         // add element to tree
         $node = $tree->create(

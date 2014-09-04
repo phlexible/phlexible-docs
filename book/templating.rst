@@ -4,4 +4,4 @@
 Creating and Using Templates
 ============================
 
-Introduction ...
+As phlexible is
