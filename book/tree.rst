@@ -57,3 +57,21 @@ Load the tree and "navigate" through it::
         $hasChildren = $tree->hasChildren($node);
     }
 
+Delete Tree Node
+----------------
+
+Delete a tree node by calling::
+
+    public function deleteAction(Request $request)
+    {
+        $treeManager = $this->get('phlexible_tree.tree_manager');
+
+        $siterootId  = $request->get('siterootId');
+        $tree        = $treeManager->getBySiteRootId($siterootId);
+        $node        = $tree->get($id);
+
+        $tree->delete($node, $userId);
+
+        // ... return ResultResponse
+    }
+

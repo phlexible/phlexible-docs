@@ -264,7 +264,11 @@ To make the backend routes available, you have to add a resource to ``app/config
         resource: admin_routing.yml
         prefix:   /admin
 
-After that, you have to add a new file ``app/config/admin_routing.yml`` and add the following lines:
+    phlexible_frontendmedia_media:
+        resource: "@PhlexibleFrontendMediaBundle/Controller/MediaController.php"
+        type:     annotation
+
+After that, add a new file ``app/config/admin_routing.yml`` and add the following lines:
 
 .. code-block:: yaml
 
@@ -380,10 +384,7 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
     encoders:
         ...
 
-        Phlexible\Bundle\UserBundle\Entity\User:
-            algorithm: md5
-            encode_as_base64: false
-            iterations: 1
+        Phlexible\Bundle\UserBundle\Entity\User: sha512
 
     firewalls:
         ...
