@@ -57,9 +57,11 @@ service::
         $values   = $request->request->all();
         $language = $request->get('language');
 
-        $elementService     = $this->get('phlexible_element.element_service');
-        $elementtype        = $elementService->getElementtypeService()->findElementtype($elementtypeId);
-        $elementtypeVersion = $elementService->getElementtypeService()->findLatestElementtypeVersion($elementtype);
+        $elementService       = $this->get('phlexible_element.element_service');
+        $elementtypeService   = $elementService->getElementtypeService();
+        $elementtype          = $elementtypeService->findElementtype($elementtypeId);
+        $elementtypeVersion   = $elementtypeService->findLatestElementtypeVersion($elementtype);
+        $elementtypeStructure = $elementtypeService->findElementtypeStructure($elementtypeVersion);
 
         // create element
         $element = $elementService->createElement($elementtypeVersion, $masterLanguage, $userId);
@@ -68,9 +70,12 @@ service::
         $oldVersion        = $oldElementVersion->getVersion();
         $isMaster          = $element->getMasterLanguage() === $language;
 
-        // create new version
-        $elementStructure = $this->createStructure($elementtypeStructure, $values, $language);
-        $elementVersion   = $this->elementService->createElementVersion(
+        // create new element structure
+        $elementStructure = new ElementStructure();
+        / ... set values to elementStructure
+
+        // create new element version
+        $elementVersion = $elementService->createElementVersion(
             $element,
             array($language => $elementStructure),
             $language,
