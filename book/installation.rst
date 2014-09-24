@@ -47,10 +47,7 @@ before you can start. Open your ``composer.json`` and add the following:
         "require": {
             ...,
 
-            "nelmio/api-doc-bundle": "~2.5",
-            "alchemy/zippy": "~0.2",
             "jms/cg": "dev-master",
-            "cocur/slugify": "~0.8",
             "phansys/getid3": "v2.0.0-BETA1",
 
             "phlexible/phlexible": "dev-master",
@@ -87,10 +84,9 @@ the needed bundles in ``AppKernel``::
             $bundles = array(
                 // ...,
 
+                // required dependencies
                 new Igorw\FileServeBundle\IgorwFileServeBundle(),
-
                 new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-
                 new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
                 // phlexible.core
@@ -189,7 +185,7 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
                 options:
                     storage_dir: %media_cache_storage_dir%
 
-    phlexible_media_site:
+    phlexible_media_manager:
         sites:
             default:
                 id: 492d88c5-dd48-4d73-b849-1cacc0a80056 # this has to be a generated id
