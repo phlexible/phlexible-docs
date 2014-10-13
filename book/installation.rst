@@ -191,7 +191,7 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
                 id: 492d88c5-dd48-4d73-b849-1cacc0a80056 # this has to be a generated id
                 root_dir: %media_manager_root_dir%
                 quota: 1000000000
-                driver: phlexible_media_manager.site_default
+                driver: phlexible_media_manager.driver.doctrine
 
     phlexible_siteroot:
         overrides:
