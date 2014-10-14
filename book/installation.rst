@@ -348,10 +348,6 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
         resource: "@PhlexibleTaskBundle/Controller/"
         type:     annotation
 
-    phlexible_teasers_catch:
-        resource: "@PhlexibleTeaserBundle/Controller/CatchController.php"
-        type:     annotation
-
     phlexible_teasers_layout:
         resource: "@PhlexibleTeaserBundle/Controller/LayoutController.php"
         type:     annotation
