@@ -91,7 +91,6 @@ the needed bundles in ``AppKernel``::
 
                 // phlexible.core
                 new Phlexible\Bundle\GuiBundle\PhlexibleGuiBundle(),
-                new Phlexible\Bundle\SecurityBundle\PhlexibleSecurityBundle(),
                 new Phlexible\Bundle\MessageBundle\PhlexibleMessageBundle(),
                 new Phlexible\Bundle\QueueBundle\PhlexibleQueueBundle(),
                 new Phlexible\Bundle\UserBundle\PhlexibleUserBundle(),
@@ -102,15 +101,13 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\DataSourceBundle\PhlexibleDataSourceBundle(),
 
                 // phlexible.media
-                new Phlexible\Bundle\MediaAssetBundle\PhlexibleMediaAssetBundle(),
-                new Phlexible\Bundle\MediaExtractorBundle\PhlexibleMediaExtractorBundle(),
-                new Phlexible\Bundle\MediaTemplateBundle\PhlexibleMediaTemplateBundle(),
                 new Phlexible\Bundle\MediaCacheBundle\PhlexibleMediaCacheBundle(),
-                new Phlexible\Bundle\MediaSiteBundle\PhlexibleMediaSiteBundle(),
+                new Phlexible\Bundle\MediaExtractorBundle\PhlexibleMediaExtractorBundle(),
                 new Phlexible\Bundle\MediaManagerBundle\PhlexibleMediaManagerBundle(),
-                new Phlexible\Bundle\DocumenttypeBundle\PhlexibleDocumenttypeBundle(),
-                new Phlexible\Bundle\MetaSetBundle\PhlexibleMetaSetBundle(),
+                new Phlexible\Bundle\MediaTemplateBundle\PhlexibleMediaTemplateBundle(),
                 new Phlexible\Bundle\MediaToolBundle\PhlexibleMediaToolBundle(),
+                new Phlexible\Bundle\MediaTypeBundle\PhlexibleMediaTypeBundle(),
+                new Phlexible\Bundle\MetaSetBundle\PhlexibleMetaSetBundle(),
 
                 // phlexible.cms
                 new Phlexible\Bundle\CmsBundle\PhlexibleCmsBundle(),
@@ -124,7 +121,6 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle(),
                 new Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle(),
                 new Phlexible\Bundle\TaskBundle\PhlexibleTaskBundle(),
-                new Phlexible\Bundle\TwigRendererBundle\PhlexibleTwigRendererBundle(),
             );
         }
     }
@@ -169,10 +165,6 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
             default: de
             available: en,de
 
-    phlexible_message:
-        use_log_handler: false
-        audit_entities: false
-
     phlexible_meta_set:
         languages:
             default: de
@@ -183,13 +175,13 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
             default:
                 id: phlexible_media_cache.storage.local
                 options:
-                    storage_dir: %media_cache_storage_dir%
+                    storage_dir: /path/to/mediacache/storage/dir
 
     phlexible_media_manager:
-        sites:
+        volumes:
             default:
                 id: 492d88c5-dd48-4d73-b849-1cacc0a80056 # this has to be a generated id
-                root_dir: %media_manager_root_dir%
+                root_dir: /path/to/mediamanager/root/dir
                 quota: 1000000000
                 driver: phlexible_media_manager.driver.doctrine
 
@@ -207,47 +199,59 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
 
     phlexible_media_tool:
         swftools:
-            pdf2swf: %tool_pdf2swf%
-            swfdump: %tool_swfdump%
-            swfcombine: %tool_swfcombine%
-
-        pdftotext:
-            pdftotext: %tool_pdftotext%
-            pdfinfo: %tool_pdfinfo%
-
+            pdf2swf: /path/to/pdf2swf
+        poppler:
+            pdfinfo: /path/to/pdfinfo
+            pdftotext: /path/to/pdftotext
+            pdftohtml: /path/to/pdftohtml
         mime:
-            file: %tool_file%
-
-        imagemagick:
-            identify: %tool_identify%
-            convert: %tool_convert%
-            mogrify: %tool_mogrify%
-
+            file: /path/to/file
         ffmpeg:
-            ffprobe: %tool_ffprobe%
-            ffmpeg: %tool_ffmpeg%~
+            ffprobe: /path/to/ffprobe
+            ffmpeg: /path/to/ffmpeg
 
 Parameters
 ~~~~~~~~~~
 
-As you can see in the previous section, there are some parameters to be set.
+Some configuration values should be defined as parameters, since they are dependending on the local environment.
 Open ``app/config/parameters.yml`` and set the following values:
 
 .. code-block:: yaml
 
-    tool_identify: /path/to/identify
-    tool_convert: /path/to/convert
-    tool_mogrify: /path/to/mogrify
+    tool_pdf2swf: /path/to/pdf2swf
+    tool_pdfinfo: /path/to/pdfinfo
+    tool_pdftohtml: /path/to/pdftohtml
+    tool_file: /path/to/file
     tool_ffprobe: /path/to/ffprobe
     tool_ffmpeg: /path/to/ffmpeg
-    tool_pdf2swf: /path/to/pdf2swf
-    tool_swfdump: /path/to/swfdump
-    tool_swfcombine: /path/to/swfcombine
-    tool_pdftotext: /path/to/pdftotext
-    tool_pdfinfo: /path/to/pdfinfo
-    tool_file: /path/to/file
     media_manager_root_dir: /path/to/project/media/files/
     media_cache_storage_dir: /path/to/project/media/frames/
+
+After that, replace these configuration values in ``app/config/config.yml`` with the new parameters:
+
+.. code-block:: yaml
+
+    phlexible_media_cache:
+        storages:
+            default:
+                options:
+                    storage_dir: %media_cache_storage_dir%
+    phlexible_media_manager:
+        volumes:
+            default:
+                root_dir: %media_manager_root_dir%
+    phlexible_media_tool:
+        swftools:
+            pdf2swf: %tool_pdf2swf%
+        poppler:
+            pdfinfo: %tool_pdfinfo%
+            pdftotext: %tool_pdftotext%
+            pdftohtml: %tool_pdftohtml%
+        mime:
+            file: %tool_file%
+        ffmpeg:
+            ffprobe: %tool_ffprobe%
+            ffmpeg: %tool_ffmpeg%
 
 Routing
 ~~~~~~~
@@ -256,13 +260,17 @@ To make the backend routes available, you have to add a resource to ``app/config
 
 .. code-block:: yaml
 
-    admin:
-        resource: admin_routing.yml
-        prefix:   /admin
-
     phlexible_frontendmedia_media:
         resource: "@PhlexibleFrontendMediaBundle/Controller/MediaController.php"
         type:     annotation
+
+    phlexible_teaser_render:
+        resource: "@PhlexibleTeaserBundle/Controller/RenderController.php"
+        type:     annotation
+        
+    admin:
+        resource: admin_routing.yml
+        prefix:   /admin
 
 After that, add a new file ``app/config/admin_routing.yml`` and add the following lines:
 
@@ -282,10 +290,6 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
 
     phlexible_datasources:
         resource: "@PhlexibleDataSourceBundle/Controller/"
-        type:     annotation
-
-    phlexible_documenttypes:
-        resource: "@PhlexibleDocumenttypeBundle/Controller/"
         type:     annotation
 
     phlexible_elements:
@@ -316,6 +320,10 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
         resource: "@PhlexibleMediaTemplateBundle/Controller/"
         type:     annotation
 
+    phlexible_mediatypes:
+        resource: "@PhlexibleDocumenttypeBundle/Controller/"
+        type:     annotation
+
     phlexible_messages:
         resource: "@PhlexibleMessageBundle/Controller/"
         type:     annotation
@@ -334,10 +342,6 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
 
     phlexible_search:
         resource: "@PhlexibleSearchBundle/Controller/"
-        type:     annotation
-
-    phlexible_security:
-        resource: "@PhlexibleSecurityBundle/Controller/"
         type:     annotation
 
     phlexible_siteroots:
