@@ -15,10 +15,6 @@ routing and more.
 Configuration
 -------------
 
-* `app`_
-    * title
-    * version
-    * url
 * `project`_
     * title
     * version
@@ -29,51 +25,27 @@ Configuration
     * `default`_
     * `available`_
 
-app
-~~~
-
-title
-.....
-
-**type**: ``string`` **default**: ``phlexible``
-
-This specifies the title of your application.
-
-version
-.......
-
-**type**: ``string`` **default**: ``1.0.0``
-
-This specifies the version of your application.
-
-url
-...
-
-**type**: ``string`` **default**: ``phlexible.net``
-
-This specifies the url of your application.
-
 project
 ~~~~~~~
 
 title
 .....
 
-**type**: ``string`` **default**: ``phlexible``
+    **type**: ``string`` **default**: ``phlexible``
 
 This specifies the title of your project.
 
 version
 .......
 
-**type**: ``string`` **default**: ``1.0.0``
+    **type**: ``string`` **default**: ``1.0.0``
 
 This specifies the version of your project.
 
 url
 ...
 
-**type**: ``string`` **default**: ``phlexible.net``
+    **type**: ``string`` **default**: ``phlexible.net``
 
 This specifies the url of your project.
 
@@ -83,7 +55,7 @@ ext
 path
 ....
 
-**type**: ``string`` **default**: ``ext-2.3.0``
+    **type**: ``string`` **default**: ``ext-2.3.0``
 
 This specifies the path to extjs.
 
@@ -93,14 +65,14 @@ languages
 default
 .......
 
-**type**: ``string`` **default**: ``de``
+    **type**: ``string`` **default**: ``de``
 
 This specifies the default backend language.
 
 available
 .........
 
-**type**: ``string`` **default**: ``de,en``
+    **type**: ``string`` **default**: ``de,en``
 
 This specifies the available backend languages.
 
@@ -113,27 +85,12 @@ Full default Configuration
     .. code-block:: yaml
 
         phlexible_gui:
-            app:
-                title:                phlexible
-                version:              1.0.0-dev
-                url:                  phlexible.net
             project:
                 title:                phlexible
                 version:              1.0.0-dev
                 url:                  phlexible.net
             ext:
                 path:                 ext-2.3.0
-            database:             # Required
-                profiler:             false
-                connections:
-                    type:                 ~ # Required
-                    host:                 ~ # Required
-                    port:                 ~ # Required
-                    dbname:               ~ # Required
-                    username:             ~ # Required
-                    password:             ~ # Required
-                    prefix:               ''
-                    charset:              utf8
             mail:                 # Required
                 from_email:           ~ # Required
                 from_name:            ~ # Required
