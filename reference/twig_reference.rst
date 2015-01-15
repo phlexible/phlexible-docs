@@ -23,7 +23,7 @@ id
     {{ id(prefix) }}
 
 ``prefix``
-    **type**: ``string``
+    **type**: ``string`` **default**: ``""``
     
 Generate a unique id. Prefix is optional.
 
@@ -71,12 +71,12 @@ url
 Returns a absolute URL (with the schema and host).
 Name can be a Link Field, Tree Node, Tree Context, or a route name.
 
-treeNode
-~~~~~~~~
+tree_node
+~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ treeNode(id) }}
+    {{ tree_node(id) }}
 
 ``id``
     **type**: ``int``
@@ -84,60 +84,76 @@ treeNode
 Returns a reference to a tree node.
 ID is a tid.
 
-imagePath
-~~~~~~~~~
+page_title
+~~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ imagePath(imageField) }}
+    {{ page_title(treeNode, name, language) }}
+
+``treeNode```
+    **type**: ``TreeNode`` | ``ContentTreeContext`` **default**: Current Tree Node
+``name``
+    **type**: ``name`` **default**: "default"
+``language``
+    **type**: ``language`` **default**: Locale from current request
+    
+Create a page title, as defined by the patterns in the current siteroot.
+
+image_path
+~~~~~~~~~~
+
+.. code-block:: jinja
+
+    {{ image_path(imageField) }}
     
 ``imageField``
     **type**: ``ImageField``
     
 Returns a relative URL (without the schema and host) for the image provided by the given image field.
 
-imageUrl
-~~~~~~~~
+image_url
+~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ imageUrl(imageField) }}
+    {{ image_url(imageField) }}
     
 ``imageField``
     **type**: ``ImageField``
     
 Returns ab absolute URL (with the schema and host) for the image provided by the given image field.
 
-iconPath
-~~~~~~~~
+icon_path
+~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ iconPath(imageField) }}
+    {{ icon_path(imageField) }}
     
 ``imageField``
     **type**: ``ImageField``
     
 Returns a relative URL (without the schema and host) for the icon provided by the given image field.
 
-iconUrl
-~~~~~~~
+icon_url
+~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ iconUrl(imageField) }}
+    {{ icon_url(imageField) }}
     
 ``imageField``
     **type**: ``ImageField``
     
 Returns an absolute URL (with the schema and host) for the icon provided by the given image field.
 
-thumbnailPath
-~~~~~~~~~~~~~
+thumbnail_path
+~~~~~~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ thumbnailPath(imageField, template) }}
+    {{ thumbnail_path(imageField, template) }}
     
 ``imageField``
     **type**: ``ImageField``
@@ -146,12 +162,12 @@ thumbnailPath
     
 Returns a relative URL (without the schema and host) for a thumbnail created for the given image field and template.
 
-thumbnailUrl
-~~~~~~~~~~~~
+thumbnail_url
+~~~~~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ thumbnailUrl(imageField, template) }}
+    {{ thumbnail_url(imageField, template) }}
     
 ``imageField``
     **type**: ``ImageField``
@@ -160,24 +176,24 @@ thumbnailUrl
     
 Returns an absolute URL (with the schema and host) for a thumbnail created for the given image field and template.
 
-downloadPath
-~~~~~~~~~~~~
+download_path
+~~~~~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ downloadPath(fileField) }}
+    {{ download_path(fileField) }}
     
 ``fileField``
     **type**: ``FileField``
     
 Returns a relative download URL (without the schema and host) for the file provided by the given file field.
 
-downloadUrl
-~~~~~~~~~~~
+download_url
+~~~~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ downloadUrl(fileField) }}
+    {{ download_url(fileField) }}
     
 ``fileField``
     **type**: ``FileField``
@@ -192,7 +208,7 @@ fileinfo
     {{ fileinfo(fileField) }}
     
 ``fileField``
-    **type**: ``FileField```
+    **type**: ``FileField``
 
 Returns an array with information about the file provided by the given file field.
 
@@ -211,6 +227,28 @@ Returns an array with information about the media template identified by ``name`
 Filters
 -------
 
+age
+~~~ 
+
+.. code-block:: jinja
+
+    {{ date|age(diffDate) }}
+
+``diffDate``
+    **type**: ``Date`` **default**: ``null``
+    
+Create a human readable age.
+If ``diffDate`` is provided, age is calculated from the given date, not the current date.
+
+nl2p
+~~~~~
+
+.. code-block:: jinja
+
+    {{ text|nl2p }}
+    
+Convert newlines to p-tags.
+
 readable_size
 ~~~~~~~~~~~~~
 
@@ -225,17 +263,35 @@ readable_size
     
 Transform a file size to a human readable file size.
 
-age
-~~~ 
+truncate_html
+~~~~~~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ date|age(diffDate) }}
+    {{ truncate_html(text, length, suffix) }}
 
-``diffDate``
-    **type**: ``Date`` **default**: ``null``
+``text``
+    **type**: ``string``
+``length``
+    **type**: ``int``
+``suffix``
+    **type**: ``string`` **default**: "&hellip;"
     
-Create a human readable age.
-If ``diffDate`` is provided, age is calculated from the given date, not the current date.
+Truncate text to given length, preserving html tags.
+
+
+Global Variables
+----------------
+
+project
+~~~~~~~
+
+The ``project`` variable is available everywhere and gives access to project settings.
+
+The available attributes are:
+
+* ``project.title``
+* ``project.url``
+* ``project.version``
 
 .. _`http://twig.sensiolabs.org/documentation`: http://twig.sensiolabs.org/documentation

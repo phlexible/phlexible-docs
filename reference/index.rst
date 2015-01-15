@@ -4,7 +4,8 @@ Reference
 .. toctree::
     :hidden:
 
-    configuration/index
+    configuration/gui
+    configuration/cms
 
     twig_reference
 

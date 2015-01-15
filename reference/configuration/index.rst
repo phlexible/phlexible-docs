@@ -5,3 +5,4 @@ Configuration
     :maxdepth: 1
 
     gui
+    cms

@@ -9,8 +9,7 @@ all options are not yet fully covered.
 
 The PhlexibleGuiBundle contains most of the "base" framework functionality
 and can be configured under the ``phlexible_gui`` key in your application configuration.
-This includes settings related to sessions, translation, forms, validation,
-routing and more.
+This includes settings related to project settings, gui languages and more.
 
 Configuration
 -------------
@@ -86,14 +85,14 @@ Full default Configuration
 
         phlexible_gui:
             project:
-                title:                phlexible
-                version:              1.0.0-dev
-                url:                  phlexible.net
+                title:       phlexible
+                version:     1.0.0-dev
+                url:         phlexible.net
             ext:
-                path:                 ext-2.3.0
-            mail:                 # Required
-                from_email:           ~ # Required
-                from_name:            ~ # Required
-            languages:            # Required
-                default:              en
-                available:            de
+                path:        ext-2.3.0
+            mail:            # Required
+                from_email:  ~ # Required
+                from_name:   ~ # Required
+            languages:       # Required
+                default:     en
+                available:   de
