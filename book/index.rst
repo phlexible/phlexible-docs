@@ -5,7 +5,6 @@ The Book
     :hidden:
 
     installation
-    templating
     media
     tree
     elements

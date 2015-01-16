@@ -27,6 +27,44 @@ id
     
 Generate a unique id. Prefix is optional.
 
+path
+~~~~
+
+.. code-block:: jinja
+
+    {{ path(name, parameters, relative) }}
+
+``name``
+    **type**: ``LinkField`` | ``TreeNode`` | ``ContentTextContext`` | ``int`` | ``string``
+``parameters``
+    **type**: ``array`` **default**: ``[]``
+``relative``
+    **type**: ``boolean`` **default**: ``false``
+
+Returns the relative URL (without the scheme and host) for the given route. If
+``relative`` is enabled, it'll create a path relative to the current path. More
+information in :ref:`book-templating-pages`.
+``name`` can be a Link Field, Tree Node, Tree Context, TID, or a route name.
+
+url
+~~~
+
+.. code-block:: jinja
+
+    {{ url(name, parameters, schemeRelative) }}
+
+``name``
+    **type**: ``LinkField`` | ``TreeNode`` | ``ContentTextContext`` | ``int`` | ``string``
+``parameters``
+    **type**: ``array`` **default**: ``[]``
+``schemeRelative``
+    **type**: ``boolean`` **default**: ``false``
+    
+Returns the absolute URL (with scheme and host) for the given route. If
+``schemeRelative`` is enabled, it'll create a scheme-relative URL. More
+information in :ref:`book-templating-pages`.
+``name`` can be a Link Field, Tree Node, Tree Context, TID, or a route name.
+
 element
 ~~~~~~~
 
@@ -41,42 +79,13 @@ Returns a reference to a content element.
 Identifier can be a plain eid, a Tree Node, or a Tree Context.
 
 
-path
-~~~~
-
-.. code-block:: jinja
-
-    {{ path(name, parameters) }}
-
-``name``
-    **type**: ``LinkField`` | ``TreeNode`` | ``ContentTextContext`` | ``name``
-``parameters``
-    **type**: ``array`` **default**: ``[]``
-    
-Returns a relative URL (without the schema and host).
-Name can be a Link Field, Tree Node, Tree Context, or a route name.
-
-url
-~~~
-
-.. code-block:: jinja
-
-    {{ url(name, parameters) }}
-
-``name``
-    **type**: ``LinkField`` | ``TreeNode`` | ``ContentTextContext`` | ``name``
-``parameters``
-    **type**: ``array`` **default**: ``[]``
-    
-Returns a absolute URL (with the schema and host).
-Name can be a Link Field, Tree Node, Tree Context, or a route name.
-
 tree_node
 ~~~~~~~~~
 
 .. code-block:: jinja
 
     {{ tree_node(id) }}
+    {{ treeNode(id) }} {# deprecated #}
 
 ``id``
     **type**: ``int``
@@ -118,6 +127,7 @@ image_url
 .. code-block:: jinja
 
     {{ image_url(imageField) }}
+    {{ image(imageField) }} {# deprecated #}
     
 ``imageField``
     **type**: ``ImageField``
@@ -129,24 +139,30 @@ icon_path
 
 .. code-block:: jinja
 
-    {{ icon_path(imageField) }}
+    {{ icon_path(imageField, size) }}
     
 ``imageField``
     **type**: ``ImageField``
+``size``
+    **type**: ``int`` **default**: ``16``
     
-Returns a relative URL (without the schema and host) for the icon provided by the given image field.
+Returns a relative URL (without the schema and host) for the media type icon provided by the given image field.
+Valid sizes are 16, 32, 48, 256
 
 icon_url
 ~~~~~~~~
 
 .. code-block:: jinja
 
-    {{ icon_url(imageField) }}
+    {{ icon_url(imageField, size) }}
+    {{ icon(imageField, size) }} {# deprecated #}
     
 ``imageField``
     **type**: ``ImageField``
+``size``
+    **type**: ``int`` **default**: ``16``
     
-Returns an absolute URL (with the schema and host) for the icon provided by the given image field.
+Returns an absolute URL (with the schema and host) for the media type icon provided by the given image field.
 
 thumbnail_path
 ~~~~~~~~~~~~~~
@@ -168,6 +184,7 @@ thumbnail_url
 .. code-block:: jinja
 
     {{ thumbnail_url(imageField, template) }}
+    {{ thumbnail(imageField) }} {# deprecated #}
     
 ``imageField``
     **type**: ``ImageField``
@@ -194,6 +211,7 @@ download_url
 .. code-block:: jinja
 
     {{ download_url(fileField) }}
+    {{ download(imageField) }} {# deprecated #}
     
 ``fileField``
     **type**: ``FileField``
