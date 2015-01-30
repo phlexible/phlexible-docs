@@ -107,6 +107,8 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle(),
                 new Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle(),
                 new Phlexible\Bundle\TaskBundle\PhlexibleTaskBundle(),
+
+                 new FOS\UserBundle\FOSUserBundle(),
             );
         }
     }
@@ -192,9 +194,6 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
             pdftohtml: /path/to/pdftohtml
         mime:
             file: /path/to/file
-        ffmpeg:
-            ffprobe: /path/to/ffprobe
-            ffmpeg: /path/to/ffmpeg
         ffmpeg:
             ffprobe: /path/to/ffprobe
             ffmpeg: /path/to/ffmpeg
