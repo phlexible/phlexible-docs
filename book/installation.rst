@@ -476,7 +476,7 @@ can be created by executing the command:
 
 .. code-block:: bash
 
-    $ php app/console media-manager:init
+    $ php app/console media-manager:init default
 
 Finish Installation
 -------------------
