@@ -136,6 +136,12 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
         #factory: sendfile # nginx
         #factory: xsendfile # apache
 
+    # FOS User Bundle
+    fos_user:
+        db_driver: orm
+        firewall_name: phlexible
+        user_class: Phlexible\Bundle\UserBundle\Entity\User
+
     phlexible_gui:
         project:
             title:   Your Project Title
