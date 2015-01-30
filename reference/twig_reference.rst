@@ -42,8 +42,7 @@ path
     **type**: ``boolean`` **default**: ``false``
 
 Returns the relative URL (without the scheme and host) for the given route. If
-``relative`` is enabled, it'll create a path relative to the current path. More
-information in :ref:`book-templating-pages`.
+``relative`` is enabled, it'll create a path relative to the current path.
 ``name`` can be a Link Field, Tree Node, Tree Context, TID, or a route name.
 
 url
@@ -61,8 +60,7 @@ url
     **type**: ``boolean`` **default**: ``false``
     
 Returns the absolute URL (with scheme and host) for the given route. If
-``schemeRelative`` is enabled, it'll create a scheme-relative URL. More
-information in :ref:`book-templating-pages`.
+``schemeRelative`` is enabled, it'll create a scheme-relative URL.
 ``name`` can be a Link Field, Tree Node, Tree Context, TID, or a route name.
 
 element
