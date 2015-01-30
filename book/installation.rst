@@ -69,10 +69,11 @@ the needed bundles in ``AppKernel``::
             $bundles = array(
                 // ...
 
-                // required dependencies
+                // required phlexible dependencies
                 new Igorw\FileServeBundle\IgorwFileServeBundle(),
                 new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
                 new FOS\UserBundle\FOSUserBundle(),
+                new Puli\Extension\Symfony\PuliBundle\PuliBundle(),
                 new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
                 // phlexible.core
