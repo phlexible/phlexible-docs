@@ -50,7 +50,7 @@ Open a command console, enter your project directory and execute the following c
 
 This command requires you to have Composer installed globally, as explained in the `installation chapter`_ installation chapter of the Composer documentation. 
 
-Step 4: Enable phlexible bundles
+Step 3: Enable phlexible bundles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 At this point, the necassary bundles are installed in your ``vendor/`` directory and
@@ -72,6 +72,7 @@ the needed bundles in ``AppKernel``::
                 // required dependencies
                 new Igorw\FileServeBundle\IgorwFileServeBundle(),
                 new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+                new FOS\UserBundle\FOSUserBundle(),
                 new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
                 // phlexible.core
