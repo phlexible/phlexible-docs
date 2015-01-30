@@ -13,7 +13,7 @@ Installing phlexible
 .. tip::
 
     First, check that you have installed the Symfony2 Standard Distribution. See
-    `http://symfony.com/doc/current/book/installation.html`_ for details.
+    `Installing and Configuring Symfony`_ for details.
 
 After Symfony2 is installed, you can add phlexible by adding several bundles to your ``composer.json`` file.
 
@@ -23,50 +23,35 @@ Step 1: Add Composer repository
 Before you can use the phlexible package or any of its bundles, you have to add
 the `phlexible Composer Repository`_. Paste the following into your ``composer.json``:
 
-.. code-block:: json
+.. code-block:: yaml
 
     {
         "repositories": [
             {
                 "type": "composer",
-                "url": "https://packages.brainbits.net/phlexible-bundles/"
+                "url": "https://packages.brainbits.net/phlexible-bundles/",
+                "options": {
+                    "ssl": {
+                        "allow_self_signed": "true"
+                    }
+                }
             }
         ]
     }
 
-Step 2: Adding libraries
-~~~~~~~~~~~~~~~~~~~~~~~~
+Step 2: Download phlexible
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-phlexible itself is a library and depends on a number of external libraries which you have to add
-before you can start. Open your ``composer.json`` and add the following:
-
-.. code-block:: json
-
-    {
-        ...,
-        "require": {
-            ...,
-
-            "jms/cg": "dev-master",
-            "phansys/getid3": "v2.0.0-BETA1",
-
-            "phlexible/phlexible": "dev-master",
-            "brainbits/toolkit": "dev-master"
-        }
-    }
-
-
-Step 3: Updating Vendors
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-To download all necessary libraries - including phlexible itself - you have to update your vendors.
+Open a command console, enter your project directory and execute the following command to download the latest stable version of this bundle:
 
 .. code-block:: bash
 
-    $ php composer.phar update
+    $ composer require "phlexible/phlexible=dev-master"
 
-Step 4: Enable phlexible
-~~~~~~~~~~~~~~~~~~~~~~~~
+This command requires you to have Composer installed globally, as explained in the `installation chapter`_ installation chapter of the Composer documentation. 
+
+Step 4: Enable phlexible bundles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 At this point, the necassary bundles are installed in your ``vendor/`` directory and
 the autoloader recognizes its classes. The only thing you need to do now is register
@@ -82,7 +67,7 @@ the needed bundles in ``AppKernel``::
         public function registerBundles()
         {
             $bundles = array(
-                // ...,
+                // ...
 
                 // required dependencies
                 new Igorw\FileServeBundle\IgorwFileServeBundle(),
@@ -206,6 +191,9 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
             pdftohtml: /path/to/pdftohtml
         mime:
             file: /path/to/file
+        ffmpeg:
+            ffprobe: /path/to/ffprobe
+            ffmpeg: /path/to/ffmpeg
         ffmpeg:
             ffprobe: /path/to/ffprobe
             ffmpeg: /path/to/ffmpeg
@@ -408,7 +396,7 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
                 path:     /
                 domain:   ~
 
-Add path' for backend access control:
+Add path for backend access control:
 
 .. code-block:: yaml
 
@@ -504,7 +492,8 @@ Now that you have a fully-functional phlexible application, you can begin develo
 Be sure to also check out the :doc:`Cookbook </cookbook/index>` which contains a wide variety
 about solving problems with phlexible.
 
-.. _`http://symfony.com/doc/current/book/installation.html`: http://symfony.com/doc/current/book/installation.html
+.. _`installation chapter`: https://getcomposer.org/doc/00-intro.md
+.. _`Installing and Configuring Symfony`: http://symfony.com/doc/current/book/installation.html
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
 .. _`standard command for creating the database schema`: http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema
 .. _`FOSUSerBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle

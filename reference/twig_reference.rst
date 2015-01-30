@@ -98,14 +98,14 @@ page_title
 
 .. code-block:: jinja
 
-    {{ page_title(treeNode, name, language) }}
+    {{ page_title(name, language, treeNode) }}
 
-``treeNode```
-    **type**: ``TreeNode`` | ``ContentTreeContext`` **default**: Current Tree Node
 ``name``
     **type**: ``name`` **default**: "default"
 ``language``
     **type**: ``language`` **default**: Locale from current request
+``treeNode```
+    **type**: ``TreeNode`` | ``ContentTreeContext`` **default**: Current Tree Node
     
 Create a page title, as defined by the patterns in the current siteroot.
 
