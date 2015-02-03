@@ -1,8 +1,8 @@
 .. index::
-    single: Media
+    single: Users
 
-User
-====
+Users
+=====
 
 This article focuses on how to handle user data in phlexible. The PhlexibleUserBundle
 extends the `FOSUSerBundle`_ and additionally brings group handling to work with.

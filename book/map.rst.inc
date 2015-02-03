@@ -1,5 +1,12 @@
+* :doc:`/book/introduction`
 * :doc:`/book/installation`
-* :doc:`/book/media`
+* :doc:`/book/architecture`
+* :doc:`/book/users`
+* :doc:`/book/volumes`
+* :doc:`/book/media_templates`
+* :doc:`/book/media_cache`
+* :doc:`/book/siteroots`
 * :doc:`/book/tree`
 * :doc:`/book/elements`
-* :doc:`/book/user`
+* :doc:`/book/teasers`
+* :doc:`/book/queue`

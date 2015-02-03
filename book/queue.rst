@@ -1,0 +1,5 @@
+.. index::
+    single: Queue
+
+Queue
+=====

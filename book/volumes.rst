@@ -1,8 +1,8 @@
 .. index::
-    single: Media
+    single: Volumes
 
-Media
-=====
+Volumes
+=======
 
 Working with media files and folders is a big part of phlexible.
 They are stored in the media manager of the application and have one thing
