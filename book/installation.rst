@@ -389,10 +389,10 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
             form_login:
                 provider:      phlexible_user
                 csrf_provider: form.csrf_provider
-                login_path:    security_login
-                check_path:    security_check
+                login_path:    fos_user_security_login
+                check_path:    fos_user_security_check
             logout:
-                path:     security_logout
+                path:     fos_user_security_logout
                 target:   /
             anonymous:    true
             switch_user:
