@@ -18,12 +18,13 @@ method. Finally add it to the :doc:`tree </book/tree>`::
      */
     public function createAction(Request $request)
     {
-        // load elementtype and elementtype version
-        $elementService     = $this->get('phlexible_element.element_service');
-        $elementtype        = $elementService->getElementtypeService()->findElementtype($elementtypeId);
-        $elementtypeVersion = $elementService->getElementtypeService()->findLatestElementtypeVersion($elementtype);
+        $elementService = $this->get('phlexible_element.element_service');
 
-        $element = $elementService->createElement($elementtypeVersion, $masterLanguage, $userId);
+        // load element source
+        $elementSource = $this->elementService->findElementSource($elementtypeId);
+
+        // create element
+        $element = $elementService->createElement($elementSource, $masterLanguage, $userId);
 
         // add element to tree
         $node = $tree->create(
@@ -45,11 +46,11 @@ method. Finally add it to the :doc:`tree </book/tree>`::
 
 .. _docs-save-element-data:
 
-Save Element Data
------------------
+Create Element Version
+----------------------
 
-Create or load an element and add a new version by calling ``createVersion()`` on the element
-service::
+Create or load an element and add a new version by calling ``createElementVersion()`` on 
+the element service::
 
     public function saveAction(Request $request)
     {
@@ -57,27 +58,19 @@ service::
         $values   = $request->request->all();
         $language = $request->get('language');
 
-        $elementService       = $this->get('phlexible_element.element_service');
-        $elementtypeService   = $elementService->getElementtypeService();
-        $elementtype          = $elementtypeService->findElementtype($elementtypeId);
-        $elementtypeVersion   = $elementtypeService->findLatestElementtypeVersion($elementtype);
-        $elementtypeStructure = $elementtypeService->findElementtypeStructure($elementtypeVersion);
+        $elementService = $this->get('phlexible_element.element_service');
 
-        // create element
-        $element = $elementService->createElement($elementtypeVersion, $masterLanguage, $userId);
-
-        $oldElementVersion = $elementService->findLatestElementVersion($element);
-        $oldVersion        = $oldElementVersion->getVersion();
-        $isMaster          = $element->getMasterLanguage() === $language;
+        // find element
+        $element = $elementService->findElement(123);
 
         // create new element structure
         $elementStructure = new ElementStructure();
-        / ... set values to elementStructure
+        // ... set values to elementStructure
 
         // create new element version
         $elementVersion = $elementService->createElementVersion(
             $element,
-            array($language => $elementStructure),
+            $elementStructure,
             $language,
             $userId,
             'element comment'
