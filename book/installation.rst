@@ -316,7 +316,7 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
         type:     annotation
 
     phlexible_mediatypes:
-        resource: "@PhlexibleDocumenttypeBundle/Controller/"
+        resource: "@PhlexibleMediaTypeBundle/Controller/"
         type:     annotation
 
     phlexible_messages:
@@ -450,9 +450,9 @@ Add user
 
 .. code-block:: bash
 
-    $ php app/console fos:user:create testuser test@example.com p@ssw0rd
+    $ php app/console fos:user:create admin admin@example.com p@ssw0rd
 
-This command adds a user with username ``testuser``, email ``test@example.com`` and
+This command adds a user with username ``admin``, email ``admin@example.com`` and
 password ``p@ssw0rd``. If any of the required arguments are not passed to the command,
 an interactive prompt will ask you to enter them.
 
@@ -463,10 +463,9 @@ To add a role to the user you just created, use the following command:
 
 .. code-block:: bash
 
-    $ php app/console fos:user:promote testuser SUPERADMIN
+    $ php app/console fos:user:promote admin ROLE_SUPER_ADMIN
 
-This command promotes the user ``testuser`` with the role ``SUPERADMIN``.
-Another role you can use at this point is ``DEVELOPER``.
+This command promotes the user ``admin`` with the role ``ROLE_SUPER_ADMIN``.
 
 Step 3: Add Media Root Folder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
