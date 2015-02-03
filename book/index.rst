@@ -13,6 +13,7 @@ The Book
     media_cache
     siteroots
     tree
+    element_types
     elements
     teasers
     queue

@@ -79,3 +79,11 @@ the element service::
         // ... return ResultResponse
     }
 
+Notable commands
+----------------
+
+.. code-block:: bash
+
+    $ php app/console element:change --commit
+
+The element:change command shows (or, with --commit, imports) element type changes. 

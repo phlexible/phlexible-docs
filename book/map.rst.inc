@@ -8,5 +8,6 @@
 * :doc:`/book/siteroots`
 * :doc:`/book/tree`
 * :doc:`/book/elements`
+* :doc:`/book/element_types`
 * :doc:`/book/teasers`
 * :doc:`/book/queue`
