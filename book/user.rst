@@ -15,7 +15,10 @@ you've configured a route to load a specific ``User`` based on its ``id`` value:
 
     public function loadAction($id)
     {
-        $user = $this->get('phlexible_user.user_manager')->find($id);
+        $userManager = $this->get('phlexible_user.user_manager');
+        
+        // find user
+        $user = $userManager->find($id);
 
         // ... do something with the user object
     }
@@ -58,6 +61,8 @@ method to save your changes::
     // for editing
     $user = $userManager->find(1);
 
+    // or...
+    
     // for creating
     $user = $userManager->create();
 
