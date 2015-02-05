@@ -96,16 +96,33 @@ page_title
 
 .. code-block:: jinja
 
-    {{ page_title(name, language, treeNode) }}
+    {{ page_title(patternName, language, treeNode) }}
 
-``name``
-    **type**: ``name`` **default**: "default"
+``patternName``
+    **type**: ``string`` **default**: "default"
 ``language``
-    **type**: ``language`` **default**: Locale from current request
+    **type**: ``string`` **default**: Locale from current request
 ``treeNode```
     **type**: ``TreeNode`` | ``ContentTreeContext`` **default**: Current Tree Node
     
-Create a page title, as defined by the patterns in the current siteroot.
+Create a page title, with a configured pattern identifier by ``patternName``.
+Will fall back to default page title, if pattern is not found.
+
+page_title_pattern
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: jinja
+
+    {{ page_title_pattern(pattern, language, treeNode) }}
+
+``pattern``
+    **type**: ``string``
+``language``
+    **type**: ``string`` **default**: Locale from current request
+``treeNode```
+    **type**: ``TreeNode`` | ``ContentTreeContext`` **default**: Current Tree Node
+    
+Create a page title, with the provided ``pattern``.
 
 image_path
 ~~~~~~~~~~
