@@ -268,7 +268,7 @@ age
     {{ date|age(diffDate) }}
 
 ``diffDate``
-    **type**: ``Date`` **default**: ``null``
+    **type**: ``DateTime`` **default**: ``null``
     
 Create a human readable age.
 If ``diffDate`` is provided, age is calculated from the given date, not the current date.
