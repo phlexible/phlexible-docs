@@ -99,7 +99,6 @@ the needed bundles in ``AppKernel``::
                 // phlexible.cms
                 new Phlexible\Bundle\CmsBundle\PhlexibleCmsBundle(),
                 new Phlexible\Bundle\SiterootBundle\PhlexibleSiterootBundle(),
-                new Phlexible\Bundle\ContentchannelBundle\PhlexibleContentchannelBundle(),
                 new Phlexible\Bundle\ElementtypeBundle\PhlexibleElementtypeBundle(),
                 new Phlexible\Bundle\ElementBundle\PhlexibleElementBundle(),
                 new Phlexible\Bundle\TeaserBundle\PhlexibleTeaserBundle(),
