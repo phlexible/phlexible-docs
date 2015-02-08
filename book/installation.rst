@@ -274,10 +274,6 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
         resource: "@PhlexibleAccessControlBundle/Controller/"
         type:     annotation
 
-    phlexible_contentchannels:
-        resource: "@PhlexibleContentchannelBundle/Controller/"
-        type:     annotation
-
     phlexible_dashboard:
         resource: "@PhlexibleDashboardBundle/Controller/"
         type:     annotation
