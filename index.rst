@@ -9,7 +9,7 @@ Welcome to phlexible documentation!
 Book
 ----
 
-Dive into phlexible x.x:
+Dive into phlexible 1.0:
 
 .. toctree::
     :hidden:
@@ -17,3 +17,25 @@ Dive into phlexible x.x:
     book/index
 
 .. include:: /book/map.rst.inc
+
+Cookbook
+--------
+
+.. toctree::
+    :hidden:
+
+    cookbook/index
+
+Read the :doc:`Cookbook </cookbook/index>`.
+
+Reference Documents
+-------------------
+
+Get answers quickly with reference documents:
+
+.. toctree::
+    :hidden:
+
+    reference/index
+
+.. include:: /reference/map.rst.inc
