@@ -5,3 +5,4 @@ Templating
     :maxdepth: 2
 
     navigation
+    media
