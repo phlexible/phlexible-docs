@@ -1,7 +1,7 @@
 .. index::
-   single: Templating; Working with Media
+   single: Templating; Working with Images
 
-Working with Media (Image)
+Working with Image
 ==========================
 
 All media files are located in phlexible media management. You can access them with fields in your element.
@@ -52,19 +52,6 @@ Template for transcoding original image to defined view
     **type**: ``string``
 
 Returns an array with template definitions for ``template``
-
-.. code-block:: jinja
-
-    [
-        'width'          => $template->getWidth(),  // String
-        'scale'           => $template->getScale(),  // String
-        'for_web'         => $template->getForWeb(),  // String
-        'format'          => $template->getFormat(),  // String
-        'colorspace'      => $template->getColorspace(),  // String
-        'quality'         => $template->getQuality(),  // String
-        'backgroundcolor' => $template->getBackgroundcolor(),  // String
-        'method'          => $template->getMethod(),  // String
-    ]
 
 Examples
 --------
