@@ -76,6 +76,18 @@ element
 Returns a reference to a content element.
 Identifier can be a plain eid, a Tree Node, or a Tree Context.
 
+special_tid
+~~~~~~~~~~~
+
+.. code-block:: jinja
+
+    {{ special_tid(name) }}
+
+``name``
+    **type**: ``string``
+
+Returns the tid of a special tid from the current siteroot.
+An invalid special tid will return null.
 
 tree_node
 ~~~~~~~~~
