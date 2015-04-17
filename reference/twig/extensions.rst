@@ -103,6 +103,18 @@ tree_node
 Returns a reference to a tree node.
 ID is a tid.
 
+node_granted
+~~~~~~~~~~~~
+
+.. code-block:: jinja
+
+    {{ node_granted(node) }}
+
+``node``
+    **type**: ``TreeNode``
+
+Returns ``true`` if user has access to the given node.
+
 page_title
 ~~~~~~~~~~
 
@@ -256,6 +268,20 @@ fileinfo
     **type**: ``FileField``
 
 Returns an array with information about the file provided by the given file field.
+
+.. code-block:: jinja
+
+    [
+        'name'          => $file->getName(),  // String
+        'mimetype'      => $file->getMimeType(), // String
+        'mediaCategory' => $file->getMediaCategory(), // String
+        'mediaType'     => $file->getMediaType(), // String
+        'size'          => $file->getSize(), // String
+        'attributes'    => $file->getAttributes(), // Array
+        'createdAt'     => $file->getCreatedAt(), // String
+        'modifiedAt'    => $file->getModifiedAt(), // String
+        'meta'          => [], // Array
+    ]
 
 mediatemplate
 ~~~~~~~~~~~~~

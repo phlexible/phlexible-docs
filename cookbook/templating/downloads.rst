@@ -1,46 +1,10 @@
 .. index::
-   single: Templating; Working with downloadable files
+   single: Templating; Working with Downloads
 
-Working with downloadable files
-===============================
+Working with Downloads
+======================
 
 All media files are located in phlexible media management. You can access them with fields in your element.
-
-Variables
----------
-
-Functions
----------
-
-``fileinfo(media)``
-~~~~~~~~~~~~~~~~~~~~
-
-``media``
-    **type**: ``object``
-
-Returns an array with following data:
-
-.. code-block:: jinja
-
-    [
-        'name'          => $file->getName(),  // String
-        'mimetype'      => $file->getMimeType(), // String
-        'mediaCategory' => $file->getMediaCategory(), // String
-        'mediaType'     => $file->getMediaType(), // String
-        'size'          => $file->getSize(), // String
-        'attributes'    => $file->getAttributes(), // Array
-        'createdAt'     => $file->getCreatedAt(), // String
-        'modifiedAt'    => $file->getModifiedAt(), // String
-        'meta'          => [], // Array
-    ]
-
-``download_path(file)``
-~~~~~~~~~~~~~~~~~~~~~~~
-
-``file``
-    **type**: ``object``
-
-creates url path for downloadable files
 
 Examples
 --------

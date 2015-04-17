@@ -8,4 +8,6 @@
   * :doc:`gui </reference/configuration/gui>`
   * :doc:`cms </reference/configuration/cms>`
 
-* :doc:`Twig Extensions </reference/twig_reference>`
+* :doc:`Twig Extensions </reference/twig/extensions>`
+
+* :doc:`Twig Variables </reference/twig/variables>`

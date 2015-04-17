@@ -1,45 +1,8 @@
 .. index::
     single: Templating; Implementing Navigation
 
-Implementing Navigation
-=======================
-
-Variables
----------
-
-``navigation``
-    **type**: ``array``
-
-Contains all navigation keys from siteroot.
-
-``node.node.title``
-    **type**: ``string``
-
-Navigation title from node.
-
-``node.active``
-    **type**: ``boolean``
-
-``true`` if node is active
-
-Functions
----------
-
-``node.viewable()``
-    **type**: ``boolean``
-
-``true`` if navigation item is in navigation, is published and not structure element~
-
-
-``node.viewableChildren()``
-    **types**: ``boolean``
-
-``true`` if node children are in navigation, are published and aren't structure elements
-
-``node_granted(node)``
-
-``true`` if user is authenticated for node
-
+Implementing Navigations
+========================
 
 Examples
 --------

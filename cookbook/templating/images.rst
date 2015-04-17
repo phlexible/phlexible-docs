@@ -1,57 +1,10 @@
 .. index::
    single: Templating; Working with Images
 
-Working with Image
-==========================
+Working with Images
+===================
 
 All media files are located in phlexible media management. You can access them with fields in your element.
-
-Variables
----------
-
-Functions
----------
-
-``fileinfo(media)``
-~~~~~~~~~~~~~~~~~~~~
-
-``media``
-    **type**: ``object``
-
-Returns an array with following data:
-
-.. code-block:: jinja
-
-    [
-        'name'          => $file->getName(),  // String
-        'mimetype'      => $file->getMimeType(), // String
-        'mediaCategory' => $file->getMediaCategory(), // String
-        'mediaType'     => $file->getMediaType(), // String
-        'size'          => $file->getSize(), // String
-        'attributes'    => $file->getAttributes(), // Array
-        'createdAt'     => $file->getCreatedAt(), // String
-        'modifiedAt'    => $file->getModifiedAt(), // String
-        'meta'          => [], // Array
-    ]
-
-``thumbnail_path(media, template)``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-``media``
-    **type**: ``object``
-
-``template``
-    **type**: ``string``
-
-Template for transcoding original image to defined view
-
-``mediatemplate(template)``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-``template``
-    **type**: ``string``
-
-Returns an array with template definitions for ``template``
 
 Examples
 --------
