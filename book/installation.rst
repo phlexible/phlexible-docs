@@ -1,4 +1,4 @@
-.. index::
+.. i	ndex::
     single: Installation
 
 Installing and Configuring phlexible
@@ -36,7 +36,9 @@ the `phlexible Composer Repository`_. Paste the following into your ``composer.j
                     }
                 }
             }
-        ]
+        ],
+        "prefer-stable": true,
+        "minimum-stability": "dev"
     }
 
 Step 2: Download phlexible
@@ -46,7 +48,7 @@ Open a command console, enter your project directory and execute the following c
 
 .. code-block:: bash
 
-    $ composer require "phlexible/phlexible=dev-master"
+    $ composer require "phlexible/phlexible"
 
 This command requires you to have Composer installed globally, as explained in the `installation chapter`_ installation chapter of the Composer documentation. 
 
@@ -106,7 +108,6 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\FrontendBundle\PhlexibleFrontendBundle(),
                 new Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle(),
                 new Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle(),
-                new Phlexible\Bundle\TaskBundle\PhlexibleTaskBundle(),
 
                  new FOS\UserBundle\FOSUserBundle(),
             );
@@ -171,38 +172,30 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
                 options:
                     storage_dir: /path/to/mediacache/storage/dir
 
-    phlexible_media_manager:
-        volumes:
-            default:
-                id: 492d88c5-dd48-4d73-b849-1cacc0a80056 # this has to be a generated id
-                root_dir: /path/to/mediamanager/root/dir
-                quota: 1000000000
-                driver: phlexible_media_manager.driver.doctrine
+	phlexible_media_manager:
+		volumes:
+			default:
+				id: 492d88c5-dd48-4d73-b849-1cacc0a80056 
+				root_dir: %media_manager_root_dir%
+				quota: 1000000000 
+				driver: phlexible_media_manager.driver.doctrine 
 
-    phlexible_siteroot:
-        overrides:
-            48ef589f-2ddc-4cb6-9a54-7e0dc0a8005b:
-                navigation:
-                    0:
-                        url: project.dev
-                        path: ~
-                        language: ~
-                        default: 1
-                        type: element
-                        target: 1062
-
-    phlexible_media_tool:
-        swftools:
-            pdf2swf: /path/to/pdf2swf
-        poppler:
-            pdfinfo: /path/to/pdfinfo
-            pdftotext: /path/to/pdftotext
-            pdftohtml: /path/to/pdftohtml
-        mime:
-            file: /path/to/file
-        ffmpeg:
-            ffprobe: /path/to/ffprobe
-            ffmpeg: /path/to/ffmpeg
+	phlexible_media_tool:
+		swftools:
+			pdf2swf: /path/to/pdf2swf
+		poppler:
+			pdfinfo: /path/to/pdfinfo
+			pdftotext: /path/to/pdftotext
+			pdftohtml: /path/to/pdftohtml
+		mime:
+			file: /path/to/file
+		ffmpeg:
+			ffprobe: /path/to/ffprobe
+			ffmpeg: /path/to/ffmpeg
+		imagine:
+			driver: phlexible_media_tool.imagine.imagick
+		image_analyzer:
+			driver: phlexible_media_tool.image_analyzer.driver.imagick
 
 Parameters
 ~~~~~~~~~~
@@ -215,37 +208,50 @@ Open ``app/config/parameters.yml`` and set the following values:
     tool_pdf2swf: /path/to/pdf2swf
     tool_pdfinfo: /path/to/pdfinfo
     tool_pdftohtml: /path/to/pdftohtml
+    tool_pdftotext: /path/to/pdftotext
     tool_file: /path/to/file
     tool_ffprobe: /path/to/ffprobe
     tool_ffmpeg: /path/to/ffmpeg
     media_manager_root_dir: /path/to/project/media/files/
     media_cache_storage_dir: /path/to/project/media/frames/
+    imagine_driver: phlexible_media_tool.imagine.imagick
+    image_analyzer_driver: phlexible_media_tool.image_analyzer.driver.imagick
 
 After that, replace these configuration values in ``app/config/config.yml`` with the new parameters:
 
 .. code-block:: yaml
 
-    phlexible_media_cache:
-        storages:
-            default:
-                options:
-                    storage_dir: %media_cache_storage_dir%
-    phlexible_media_manager:
-        volumes:
-            default:
-                root_dir: %media_manager_root_dir%
-    phlexible_media_tool:
-        swftools:
-            pdf2swf: %tool_pdf2swf%
-        poppler:
-            pdfinfo: %tool_pdfinfo%
-            pdftotext: %tool_pdftotext%
-            pdftohtml: %tool_pdftohtml%
-        mime:
-            file: %tool_file%
-        ffmpeg:
-            ffprobe: %tool_ffprobe%
-            ffmpeg: %tool_ffmpeg%
+	phlexible_media_cache:
+		storages:
+			default:
+				id: phlexible_media_cache.storage.local
+				options:
+					storage_dir: %media_cache_storage_dir%
+
+	phlexible_media_manager:
+		volumes:
+			default:
+				id: 492d88c5-dd48-4d73-b849-1cacc0a80056
+				root_dir: %media_manager_root_dir%
+				quota: 1000000000
+				driver: phlexible_media_manager.driver.doctrine
+
+	phlexible_media_tool:
+		swftools:
+			pdf2swf: %tool_pdf2swf%
+		poppler:
+			pdfinfo: %tool_pdfinfo%
+			pdftotext: %tool_pdftotext%
+			pdftohtml: %tool_pdftohtml%
+		mime:
+			file: %tool_file%
+		ffmpeg:
+			ffprobe: %tool_ffprobe%
+			ffmpeg: %tool_ffmpeg%
+		imagine:
+			driver: %imagine_driver%
+		image_analyzer:
+			driver: %image_analyzer_driver%
 
 Routing
 ~~~~~~~
@@ -338,10 +344,6 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
         resource: "@PhlexibleSiterootBundle/Controller/"
         type:     annotation
 
-    phlexible_tasks:
-        resource: "@PhlexibleTaskBundle/Controller/"
-        type:     annotation
-
     phlexible_teasers_layout:
         resource: "@PhlexibleTeaserBundle/Controller/LayoutController.php"
         type:     annotation
@@ -364,13 +366,17 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
     providers:
         ...
 
-        phlexible_user:
-            id: phlexible_user.user_manager
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     encoders:
         ...
 
-        Phlexible\Bundle\UserBundle\Entity\User: sha512
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_BACKEND, ROLE_ALLOWED_TO_SWITCH, ROLE_DEBUG]
+        ROLE_BACKEND:     ROLE_USER
 
     firewalls:
         ...
@@ -382,8 +388,8 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
         phlexible:
             pattern:    ^/admin
             form_login:
-                provider:      phlexible_user
-                csrf_provider: form.csrf_provider
+                provider:      fos_userbundle
+                csrf_provider: security.csrf.token_manager
                 login_path:    fos_user_security_login
                 check_path:    fos_user_security_check
             logout:
@@ -391,7 +397,7 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
                 target:   /
             anonymous:    true
             switch_user:
-                role:     users_impersonate
+                role:     ROLE_ALLOWED_TO_SWITCH
             remember_me:
                 key:      %secret%
                 lifetime: 604800
@@ -403,9 +409,9 @@ Add path for backend access control:
 .. code-block:: yaml
 
     access_control:
-        - { path: ^/admin/security/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/security/asset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/security/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/users/asset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: login }
 
 Setup
