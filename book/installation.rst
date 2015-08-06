@@ -46,7 +46,7 @@ Open a command console, enter your project directory and execute the following c
 
 .. code-block:: bash
 
-    $ composer require "phlexible/phlexible=dev-master"
+    $ composer require "phlexible/phlexible"
 
 This command requires you to have Composer installed globally, as explained in the `installation chapter`_ installation chapter of the Composer documentation. 
 
