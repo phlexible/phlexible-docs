@@ -1,4 +1,4 @@
-.. i	ndex::
+.. i    ndex::
     single: Installation
 
 Installing and Configuring phlexible
@@ -172,30 +172,30 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
                 options:
                     storage_dir: /path/to/mediacache/storage/dir
 
-	phlexible_media_manager:
-		volumes:
-			default:
-				id: 492d88c5-dd48-4d73-b849-1cacc0a80056 
-				root_dir: %media_manager_root_dir%
-				quota: 1000000000 
-				driver: phlexible_media_manager.driver.doctrine 
+    phlexible_media_manager:
+        volumes:
+            default:
+                id: 492d88c5-dd48-4d73-b849-1cacc0a80056 
+                root_dir: %media_manager_root_dir%
+                quota: 1000000000 
+                driver: phlexible_media_manager.driver.doctrine 
 
-	phlexible_media_tool:
-		swftools:
-			pdf2swf: /path/to/pdf2swf
-		poppler:
-			pdfinfo: /path/to/pdfinfo
-			pdftotext: /path/to/pdftotext
-			pdftohtml: /path/to/pdftohtml
-		mime:
-			file: /path/to/file
-		ffmpeg:
-			ffprobe: /path/to/ffprobe
-			ffmpeg: /path/to/ffmpeg
-		imagine:
-			driver: phlexible_media_tool.imagine.imagick
-		image_analyzer:
-			driver: phlexible_media_tool.image_analyzer.driver.imagick
+    phlexible_media_tool:
+        swftools:
+            pdf2swf: /path/to/pdf2swf
+        poppler:
+            pdfinfo: /path/to/pdfinfo
+            pdftotext: /path/to/pdftotext
+            pdftohtml: /path/to/pdftohtml
+        mime:
+            file: /path/to/file
+        ffmpeg:
+            ffprobe: /path/to/ffprobe
+            ffmpeg: /path/to/ffmpeg
+        imagine:
+            driver: phlexible_media_tool.imagine.imagick
+        image_analyzer:
+            driver: phlexible_media_tool.image_analyzer.driver.imagick
 
 Parameters
 ~~~~~~~~~~
@@ -221,37 +221,37 @@ After that, replace these configuration values in ``app/config/config.yml`` with
 
 .. code-block:: yaml
 
-	phlexible_media_cache:
-		storages:
-			default:
-				id: phlexible_media_cache.storage.local
-				options:
-					storage_dir: %media_cache_storage_dir%
+    phlexible_media_cache:
+        storages:
+            default:
+                id: phlexible_media_cache.storage.local
+                options:
+                    storage_dir: %media_cache_storage_dir%
 
-	phlexible_media_manager:
-		volumes:
-			default:
-				id: 492d88c5-dd48-4d73-b849-1cacc0a80056
-				root_dir: %media_manager_root_dir%
-				quota: 1000000000
-				driver: phlexible_media_manager.driver.doctrine
+    phlexible_media_manager:
+        volumes:
+            default:
+                id: 492d88c5-dd48-4d73-b849-1cacc0a80056
+                root_dir: %media_manager_root_dir%
+                quota: 1000000000
+                driver: phlexible_media_manager.driver.doctrine
 
-	phlexible_media_tool:
-		swftools:
-			pdf2swf: %tool_pdf2swf%
-		poppler:
-			pdfinfo: %tool_pdfinfo%
-			pdftotext: %tool_pdftotext%
-			pdftohtml: %tool_pdftohtml%
-		mime:
-			file: %tool_file%
-		ffmpeg:
-			ffprobe: %tool_ffprobe%
-			ffmpeg: %tool_ffmpeg%
-		imagine:
-			driver: %imagine_driver%
-		image_analyzer:
-			driver: %image_analyzer_driver%
+    phlexible_media_tool:
+        swftools:
+            pdf2swf: %tool_pdf2swf%
+        poppler:
+            pdfinfo: %tool_pdfinfo%
+            pdftotext: %tool_pdftotext%
+            pdftohtml: %tool_pdftohtml%
+        mime:
+            file: %tool_file%
+        ffmpeg:
+            ffprobe: %tool_ffprobe%
+            ffmpeg: %tool_ffmpeg%
+        imagine:
+            driver: %imagine_driver%
+        image_analyzer:
+            driver: %image_analyzer_driver%
 
 Routing
 ~~~~~~~
