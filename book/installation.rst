@@ -1,4 +1,4 @@
-.. index::
+.. i	ndex::
     single: Installation
 
 Installing and Configuring phlexible
@@ -36,7 +36,9 @@ the `phlexible Composer Repository`_. Paste the following into your ``composer.j
                     }
                 }
             }
-        ]
+        ],
+		"prefer-stable": true,
+		"minimum-stability": "dev"
     }
 
 Step 2: Download phlexible
@@ -106,7 +108,6 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\FrontendBundle\PhlexibleFrontendBundle(),
                 new Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle(),
                 new Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle(),
-                new Phlexible\Bundle\TaskBundle\PhlexibleTaskBundle(),
 
                  new FOS\UserBundle\FOSUserBundle(),
             );
@@ -171,38 +172,30 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
                 options:
                     storage_dir: /path/to/mediacache/storage/dir
 
-    phlexible_media_manager:
-        volumes:
-            default:
-                id: 492d88c5-dd48-4d73-b849-1cacc0a80056 # this has to be a generated id
-                root_dir: /path/to/mediamanager/root/dir
-                quota: 1000000000
-                driver: phlexible_media_manager.driver.doctrine
+	phlexible_media_manager:
+		volumes:
+			default:
+				id: 492d88c5-dd48-4d73-b849-1cacc0a80056 
+				root_dir: %media_manager_root_dir%
+				quota: 1000000000 
+				driver: phlexible_media_manager.driver.doctrine 
 
-    phlexible_siteroot:
-        overrides:
-            48ef589f-2ddc-4cb6-9a54-7e0dc0a8005b:
-                navigation:
-                    0:
-                        url: project.dev
-                        path: ~
-                        language: ~
-                        default: 1
-                        type: element
-                        target: 1062
-
-    phlexible_media_tool:
-        swftools:
-            pdf2swf: /path/to/pdf2swf
-        poppler:
-            pdfinfo: /path/to/pdfinfo
-            pdftotext: /path/to/pdftotext
-            pdftohtml: /path/to/pdftohtml
-        mime:
-            file: /path/to/file
-        ffmpeg:
-            ffprobe: /path/to/ffprobe
-            ffmpeg: /path/to/ffmpeg
+	phlexible_media_tool:
+		swftools:
+			pdf2swf: /path/to/pdf2swf
+		poppler:
+			pdfinfo: /path/to/pdfinfo
+			pdftotext: /path/to/pdftotext
+			pdftohtml: /path/to/pdftohtml
+		mime:
+			file: /path/to/file
+		ffmpeg:
+			ffprobe: /path/to/ffprobe
+			ffmpeg: /path/to/ffmpeg
+		imagine:
+			driver: phlexible_media_tool.imagine.imagick
+		image_analyzer:
+			driver: phlexible_media_tool.image_analyzer.driver.imagick
 
 Parameters
 ~~~~~~~~~~
@@ -225,27 +218,37 @@ After that, replace these configuration values in ``app/config/config.yml`` with
 
 .. code-block:: yaml
 
-    phlexible_media_cache:
-        storages:
-            default:
-                options:
-                    storage_dir: %media_cache_storage_dir%
-    phlexible_media_manager:
-        volumes:
-            default:
-                root_dir: %media_manager_root_dir%
-    phlexible_media_tool:
-        swftools:
-            pdf2swf: %tool_pdf2swf%
-        poppler:
-            pdfinfo: %tool_pdfinfo%
-            pdftotext: %tool_pdftotext%
-            pdftohtml: %tool_pdftohtml%
-        mime:
-            file: %tool_file%
-        ffmpeg:
-            ffprobe: %tool_ffprobe%
-            ffmpeg: %tool_ffmpeg%
+	phlexible_media_cache:
+		storages:
+			default:
+				id: phlexible_media_cache.storage.local
+				options:
+					storage_dir: %media_cache_storage_dir%
+
+	phlexible_media_manager:
+		volumes:
+			default:
+				id: 492d88c5-dd48-4d73-b849-1cacc0a80056
+				root_dir: %media_manager_root_dir%
+				quota: 1000000000
+				driver: phlexible_media_manager.driver.doctrine
+
+	phlexible_media_tool:
+		swftools:
+			pdf2swf: %tool_pdf2swf%
+		poppler:
+			pdfinfo: %tool_pdfinfo%
+			pdftotext: %tool_pdftotext%
+			pdftohtml: %tool_pdftohtml%
+		mime:
+			file: %tool_file%
+		ffmpeg:
+			ffprobe: %tool_ffprobe%
+			ffmpeg: %tool_ffmpeg%
+		imagine:
+			driver: %imagine_driver%
+		image_analyzer:
+			driver: %image_analyzer_driver%
 
 Routing
 ~~~~~~~
@@ -336,10 +339,6 @@ After that, add a new file ``app/config/admin_routing.yml`` and add the followin
 
     phlexible_siteroots:
         resource: "@PhlexibleSiterootBundle/Controller/"
-        type:     annotation
-
-    phlexible_tasks:
-        resource: "@PhlexibleTaskBundle/Controller/"
         type:     annotation
 
     phlexible_teasers_layout:
