@@ -4,72 +4,93 @@
 phlexible Twig Variables
 ========================
 
+.. _variables_siteroot:
+
 siteroot
 --------
 **type**: ``Phlexible\Bundle\SiterootBundle\Entity\Siteroot``
 
-``siteroot.id``
-    **returns**: ``string``
+The ``siteroot`` variable contains the current siteroot.
+
+Notable accessors are:
+
+* ``siteroot.id`` Returns the ID of the siteroot.
+* ``siteroot.title`` Returns the title of the siteroot.
+
+.. _variables_treeNode:
 
 treeNode
 --------
 **type**: ``Phlexible\Bundle\TreeBundle\ContentTree\ContentTreeNode``
 
-``treeNode.id``
-    **returns**: ``string``
+The ``treeNode`` variable contains the current Node.
+
+Notable accessors are:
+
+* ``treeNode.id`` Returns the ID of the node.
+* ``treeNode.publishedAt`` Returns the publish date of the node.
+
+.. _variables_treeContext:
 
 treeContext
 -----------
 **type**: ``Phlexible\Bundle\TreeBundle\ContentTree\ContentTreeContext``
 
-``treeContext.title``
-    **returns**: ``string``
+The ``treeContext`` variable contains the current Tree Context. 
 
-Navigation title from node.
+Notable accessors are:
 
-``treeContext.active``
-    **returns**: ``boolean``
+* ``treeContext.title`` Returns the page title of the node.
+* ``treeContext.viewable`` Returns ``true`` if the node is in navigation, is published and not a structure element.
+* ``treeContext.viewableChildren`` Returns ``true`` if the node has at least one viewable child, i.e. that is in navigation, are published and aren't structure elements.
 
-``true`` if node is active.
-
-``treeContext.viewable``
-    **returns**: ``boolean``
-
-``true`` if node is in navigation, is published and not a structure element.
-
-``treeContext.viewableChildren``
-    **returns**: ``boolean``
-
-``true`` if node has at least one viewable child, i.e. that is in navigation, are published and aren't structure elements.
+.. _variables_contentElement:
 
 contentElement
 --------------
 **type**: ``Phlexible\Bundle\ElementBundle\ContentElement\ContentElement``
 
+The ``contentElement`` variable contains the current Element.
+
+Notable accessors are:
+
+* ``contentElement.eid`` Returns the eid of the element.
+
+.. _variables_content:
+
 content
 -------
 **type**: ``Phlexible\Bundle\ElementBundle\Model\ElementStructure``
 
-The content of the current node.
+The ``content`` variable contains the content of the current node.
 
-``content.findValue(name)``
-    
-    **returns**: ``boolean``
+Notable accessors are:
+
+* ``content.findValue(name)`` Returns the first value with the given ``name``.
+
+.. _variables_specialTids:
 
 specialTids
 -----------
 **type**: ``array``
 
-An array that contains all special tids from current siteroot.
+The ``specialTids`` variable contains and array of special tids as name/tid pairs from the current siteroot.
 
-navigation
-----------
+.. _variables_navigations:
+
+navigations
+-----------
 **type**: ``array``
 
-An array that contains all navigations for the current node.
+The ``navigation`` variable contains an array of :ref:`variables_treeContext`, with each representing a navigation for the current node.
+Each entry is of type ``TreeContext``, but provides additional context sensitive navigation information:
+
+* ``treeContext.active`` Returns true, if this node is in the current path.
+
+.. _variables_teasers:
 
 teasers
 -------
 **type**: ``array``
 
-An array that contains all teasers for the current node.
+The ``teasers`` variable contains an array with all layout areas and teasers of the current node.

@@ -7,6 +7,8 @@ Implementing Navigations
 Examples
 --------
 
+.. _cookbook_templating_navigations_simple:
+
 Simple navigation
 ~~~~~~~~~~~~~~~~~
 
@@ -26,13 +28,17 @@ Simple navigation
         </ul>
     {% endif %}
 
-Simple navigaton with children
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This example retrieves the children navigation ``main`` from the :ref:`variables_navigations` twig variable, and loops over them. Each child node is a :ref:`variables_treeContext`, and is only display if it is ``viewable``.
+
+.. _cookbook_templating_navigations_children:
+
+Navigaton with children
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: jinja
 
-    {# get all children from navigation with key `main` #}
-    {% set items = navigation.main.children %}
+    {# get all children from navigation with key `side` #}
+    {% set items = navigation.side.children %}
     {% if items %}
         <ul>
             {% for item in items %}
@@ -48,8 +54,12 @@ Simple navigaton with children
         </ul>
     {% endif %}
 
-Simple navigaton with children and role model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This example retrieves the navigation ``side`` from the :ref:`variables_navigations` twig variable, and loops over the children. Each child ``item`` is a :ref:`variables_treeContext`, and is only display if it is ``viewable``. If the child ``item`` has ``viewableChildren``, and is ``active`` (in the path to the current node), the :ref:`cookbook_templating_navigations_simple` is included.
+
+.. _cookbook_templating_navigations_access_check:
+
+Navigaton with access checks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: jinja
 
@@ -69,3 +79,5 @@ Simple navigaton with children and role model
             {% endfor %}
         </ul>
     {% endif %}
+
+This example retrieves the navigation ``side`` from the :ref:`variables_navigations` twig variable, and loops over the children. Each child ``item`` is a :ref:`variables_treeContext`, and is only display if it is ``viewable``. If the child ``item`` has ``viewableChildren``, and access to the ``item`` is granted (``node_granted``), the :ref:`cookbook_templating_navigations_simple` is included.
