@@ -1,38 +1,35 @@
 .. index::
-    single: Users
+    single: Book; Users
 
 Users
 =====
 
-This article focuses on how to handle user data in phlexible. The PhlexibleUserBundle
-extends the `FOSUSerBundle`_ and additionally brings group handling to work with.
+This article focuses on how to handle users in phlexible. The PhlexibleUserBundle
+uses the `FOSUSerBundle`_ and extends it with additional functionality like groups.
 
-Fetching User Object
---------------------
+All access to users is done via the user manager. Analog to this, all access to groups is done via the group manager.
 
-Fetching a user object from the database is very easy. For example, suppose
-you've configured a route to load a specific ``User`` based on its ``id`` value::
-
-    public function loadAction($id)
-    {
-        $userManager = $this->get('phlexible_user.user_manager');
-        
-        // find user
-        $user = $userManager->find($id);
-
-        // ... do something with the user object
-    }
-
-As you can see, phlexible ships with a user manager. Once you have the
-user manager, you have access to all sorts of helpful methods::
+.. code-block:: php
 
     $userManager = $this->get('phlexible_user.user_manager');
+    $groupManager = $this->get('phlexible_user.group_manager');
+        
+Retrieving Users
+----------------
 
-    // query by the primary key (usually "id")
+To fetch a user by id, use the ``find()`` method on the user manager:
+
+.. code-block:: php
+
+    // find user by id
     $user = $userManager->find($id);
 
-    // find a user by username
-    $user = $userManager->findByUsername('john.doe');
+The user manager also provides additional methods for finding users:
+
+.. code-block:: php
+
+    // find users by criteria
+    $user = $userManager->findBy(array('enabled' => 0));
 
     // find a user by criteria
     $user = $userManager->findOneBy(array('email' => 'john.doe@example.com'));
@@ -40,56 +37,89 @@ user manager, you have access to all sorts of helpful methods::
     // find all users
     $users = $userManager->findAll();
 
-    // find a group of users based on criteria
-    $users = $userManager->findBy(array('enabled' => 1));
+Updating Users
+--------------
 
-    // get logged in users
-    $users = $userManager->findLoggedInUsers();
-
-.. note::
-
-    Of course, you can also issue complex queries. Use the
-    Doctrine `Query Builder`_ for that.
-
-Creating/Updating User Object
------------------------------
-
-To create or update a user, you need to fetch (for updating) or instantiate (for creating)
-a user object and call the desired setters. After that, call the ``updateUser()``
-method to save your changes::
-
-    // for editing
-    $user = $userManager->find(1);
-
-    // or...
-    
-    // for creating
-    $user = $userManager->create();
-
-    // example -> change firstname & lastname
-    $user->setFirstname('John');
-    $user->setLastname('Doe');
-
-    // ...
-
-    // save changes
-    $userManager->updateUser($user);
-
-Deleting User Object
---------------------
-
-Deleting a user involves three steps:
-
-#. fetching object of user that will be deleted
-#. fetching object of user that is successor
-#. call deleteUser()
+To update an user, call the ``updateUser()`` method on the user manager:
 
 .. code-block:: php
 
-    $deleteUser = $userManager->find(1);
-    $successor = $userManager->find(2);
+    // for an existing user
+    $user = $userManager->find(1);
 
-    $userManager->deleteUser($deleteUser, $successor);
+    // ... or for a new user
+    $user = new \Phlexible\Bundle\UserBundle\Entity\User();
+
+    $user->setFirstname('John');
+    $user->setLastname('Doe');
+
+    // update user
+    $userManager->updateUser($user);
+
+Deleting Users
+--------------
+
+To delete an user, call the ``deleteUser()`` method on the user manager:
+
+.. code-block:: php
+
+    $user = $userManager->find(1);
+
+    // delete user
+    $userManager->deleteUser($user);
+
+Retrieving Groups
+-----------------
+
+To fetch a group by id, use the ``find()`` method on the group manager:
+
+.. code-block:: php
+
+    // find group by id
+    $group = $groupManager->find($id);
+
+The group manager also provides additional methods for finding groups:
+
+.. code-block:: php
+
+    // find groups by criteria
+    $groups = $groupManager->findBy(array('name' => 'testgroup'));
+
+    // find a group by criteria
+    $group = $groupManager->findOneBy(array('name' => 'testgroup'));
+
+    // find all groups
+    $groups = $groupManager->findAll();
+
+Updating Groups
+---------------
+
+To update a group, call the ``updateGroup()`` method on the group manager:
+
+.. code-block:: php
+
+    // for an existing group
+    $group = $groupManager->find(1);
+
+    // ... or for a new group
+    $group = new \Phlexible\Bundle\UserBundle\Entity\Group();
+
+    $group->setName('testgroup');
+
+    // update group
+    $groupManager->updateGroup($group);
+
+Deleting Groups
+---------------
+
+To delete a group, call the ``deleteGroup()`` method on the group manager:
+
+.. code-block:: php
+
+    $group = $groupManager->find(1);
+
+    // delete group
+    $groupManager->deleteGroup($group);
 
 .. _`FOSUSerBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle
 .. _`Query Builder`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html

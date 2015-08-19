@@ -11,73 +11,102 @@ in common: The volumes!
 Volume
 ------
 
-A volume can be seen as a root (folder) in the media manager.
-It holds the files and folders and is responsible for loading the desired
-data. You can use the volume manager for this kind of operations.
-Simply grab it from the container::
+A volume is a hierarchical set of folder and files, which can be accessed through the (`Volume`_) object.
+To get a volume, you need to retrieve it through the volume manager.
 
-    public function listAction()
-    {
-        $volumeManager = $this->get('phlexible_media_manager.volume_manager');
-        $volume = $volumeManager->getSiteById($siteId);
-    }
+.. code-block:: php
+
+    $volumeManager = $this->get('phlexible_media_manager.volume_manager');
+    $volume = $volumeManager->getVolumeById($siteId);
 
 .. hint::
 
     The volume id can be found in ``app/config/config.yml``.
 
-Loading Files/Folders
----------------------
+Retrieving Files
+----------------
 
-Now that you have access to the media site, you can call some helpful methods
-to get files and/or folders::
+Now that you have access to a volume, you can call several methods to retrieve files:
 
     // find files
     $file = $volume->findFile($id);
     $file = $volume->findFileByPath('/some/path/to/file');
-    // ...
+    $files = $volume->findFilesByFolder($folder);
+
+There are more file related methods in the volume (`Volume`_) to help you find the file you want to retrieve.
+
+Retrieving Folders
+------------------
+
+Same goes for folders:
 
     // find folders
     $folder = $volume->findFolder($id);
-    $folder = $volume->findFolderByFileId($fileId);
-    // ...
+    $folders = $volume->findFoldersByParentFolder($parentFolder);
 
-There are more methods in the volume (`Volume`_) to help you find the object you need.
+There are more folder related methods in the volume (`Volume`_) to help you find the folder you want to retrieve.
 
 .. _docs-create-folder:
 
-Create Folder
--------------
+Creating Folders
+----------------
 
-Creating a folder is very simple::
+To create a folder, call the ``createFolder()`` method on the (`Volume`_):
 
-    $parentFolder = $volume->findFolder($parentId);
-    $folder = $volume->createFolder($parentFolder, 'Folder Name', array(), $userId);
+    $parentFolder = $volume->findFolder($parentoId);
+    $folderName = 'Test Folder';
+    $attributes = array();
+    $userId = $this->getUser()->getId();
+    $folder = $volume->createFolder($parentFolder, $folderName, $attributes, $userId);
 
-The ``array`` can contain an array of attributes that you can define by yourself. They are
-stored serialized in the database. The ``userId`` is the creator of the folder.
+* The ``$parentFolder`` argument is the parent folder under which the new folder will be created.
+* The ``$folderName`` argument is the name of the new folder.
+* The ``$attributes`` argument is a simple array with attributes that you can define for the folder. 
+* The ``$userId`` argument is the creator of the folder.
 
-Create File
------------
+Creating Files
+--------------
 
-To create a file, you have to find or :ref:`create a folder <docs-create-folder>` where the file will be put
-into. Afterwards you can simply call the ``createFile()`` method::
+To create a file, call the ``createFile()`` method on the (`Volume`_), with the parent folder in which the new file will created. 
+Afterwards you can simply call the ``createFile()`` method::
 
-    // find folder
     $folder = $volume->findFolder($folderId);
-
-    // or create folder ... see above
+    $fileSource = new FileSource();
+    $attributes = array();
+    $userId = $this->getUser()->getId();
 
     $file = $volume->createFile($folder, $fileSource, array(), $userId);
 
-The ``fileSource`` has to be one of the following:
+* The ``$parentFolder`` argument is the parent folder under which the new folder will be created.
+* The ``$fileSource`` argument is the source of the new file. See below for more detailled information.
+* The ``$attributes`` argument is a simple array with attributes that you can define for the file. 
+* The ``$userId`` argument is the creator of the folder.
 
-- ``CreateFileSource``: Creates an empty file
-- ``FilesystemFileSource``: Creates file from filesystem
-- ``StreamFileSource``: Creates a file stream
-- ``UploadedFileSource``: Creates file source from uploaded file
+The ``$fileSource`` has to be of the Interface ``FileSourceInterface``, phlexible provides the following default file sources:
 
-Just like the ``array`` for the folder creation, you can define an array
-with file attributes by yourself. The ``userId`` is the creator of the file.
+- ``CreateFileSource``: Represents an empty file
+- ``FilesystemFileSource``: References a file in the filesystem
+- ``StreamFileSource``: References a stream
+- ``UploadedFileSource``: References an uploaded file
+
+Updating Files
+--------------
+
+Todo
+
+Updating Folders
+----------------
+
+Todo
+
+Deleting Files
+--------------
+
+Todo
+
+Deleting Folders
+----------------
+
+Todo
 
 .. _Volume: http://link-to-api.phlexible.net/Volume
