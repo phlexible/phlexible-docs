@@ -7,6 +7,7 @@ Reference
     configuration/gui
     configuration/cms
 
-    twig_reference
+    twig/extensions
+    twig/variables
 
 .. include:: /reference/map.rst.inc

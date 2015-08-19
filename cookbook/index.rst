@@ -7,5 +7,6 @@ The Cookbook
     media/index
     element/index
     tree/index
+    templating/index
 
 .. include:: /cookbook/map.rst.inc
