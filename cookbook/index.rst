@@ -5,11 +5,13 @@ The Cookbook
     :hidden:
 
     dashboard/index
-    element/index
+    elementtype/index
     gui/index
-    media/index
+    message/index
     problem/index
+    search/index
     templating/index
-    tree/index
+
+The phlexible Cookbook is a continuously growing collection of specific recipes that explain how to correctly solve the most recurrent problems that phlexible developers face in their day to day work.
 
 .. include:: /cookbook/map.rst.inc

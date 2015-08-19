@@ -65,3 +65,20 @@ To delete a siteroot, call the ``deleteSiteroot()`` method on the siteroot manag
 
     // delete siteroot
     $siterootManager->deleteSiteroot($siteroot);
+
+Siteroots in the CLI
+--------------------
+
+Information about siteroots can be displayed via a cli command.
+
+Display siteroot id and name of all siteroots:
+
+.. code-block:: bash
+
+	$ php app/console siteroot:show
+
+Display detailled information about all siteroots:
+
+.. code-block:: bash
+
+	$ php app/console siteroot:show -v

@@ -1,5 +1,5 @@
 .. index::
-   single: Dashboard; How to create a portlet
+   single: Dashboard; How to create a custom portlet
 
-How to create a portlet
-=======================
+How to create a custom portlet
+==============================

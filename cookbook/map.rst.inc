@@ -2,23 +2,24 @@
   
   * :doc:`/cookbook/dashboard/portlet`
 
-* :doc:`/cookbook/element/index`
-
-  * :doc:`/cookbook/element/working`
-
 * :doc:`/cookbook/gui/index`
 
   * :doc:`/cookbook/gui/scripts`
   * :doc:`/cookbook/gui/css`
   * :doc:`/cookbook/gui/menu`
 
-* :doc:`/cookbook/media/index`
+* :doc:`/cookbook/message/index`
 
-  * :doc:`/cookbook/media/working`
+  * :doc:`/cookbook/message/handler`
+  * :doc:`/cookbook/message/message`
 
 * :doc:`/cookbook/problem/index`
   
   * :doc:`/cookbook/problem/checker`
+
+* :doc:`/cookbook/search/index`
+  
+  * :doc:`/cookbook/search/handler`
 
 * :doc:`/cookbook/templating/index`
 
@@ -26,7 +27,3 @@
   * :doc:`/cookbook/templating/images`
   * :doc:`/cookbook/templating/downloads`
   * :doc:`/cookbook/templating/navigations`
-
-* :doc:`/cookbook/tree/index`
-
-  * :doc:`/cookbook/tree/working`

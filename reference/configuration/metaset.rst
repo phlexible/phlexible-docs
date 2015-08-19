@@ -1,14 +1,14 @@
 .. index::
-    single: Configuration reference; PhlexibleCmsBundle
+    single: Configuration reference; PhlexibleMetaSetBundle
 
-phlexible_cms Configuration
-===========================
+phlexible_meta_set Configuration
+================================
 
 This reference document is a work in progress. It should be accurate, but
 all options are not yet fully covered.
 
-The PhlexibleCmsBundle contains most of the "base" cms functionality
-and can be configured under the ``phlexible_gui`` key in your application configuration.
+The PhlexibleMetaSetBundle contains meta data related functionality
+and can be configured under the ``phlexible_meta_set`` key in your application configuration.
 This includes settings related to languages and more.
 
 Configuration
@@ -26,14 +26,14 @@ default
 
     **type**: ``string`` **default**: ``de``
 
-This specifies the default frontend language.
+This specifies the default meta set language.
 
 available
 .........
 
     **type**: ``string`` **default**: ``de,en``
 
-This specifies the available frontend languages.
+This specifies the available meta set languages.
 
 
 Full default Configuration
@@ -43,7 +43,9 @@ Full default Configuration
 
     .. code-block:: yaml
 
-        phlexible_cms:
+        phlexible_meta_set:
             languages:     # Required
                 default:   en
                 available: en
+            suggest:
+                seperator: ','

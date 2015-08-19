@@ -1,13 +1,15 @@
 * **Configuration Options**
   
-  Ever wondered what configuration options you have available to you in files
-  such as ``app/config/config.yml``? In this section, all the available configuration
-  is broken down by the key (e.g. ``phlexible_cms``) that defines each possible
-  section of your phlexible configuration.
+  In this section, all the available configuration is broken down by the key (e.g. ``phlexible_cms``) 
+  that defines each possible section of the phlexible bundle configuration.
   
-  * :doc:`gui </reference/configuration/gui>`
-  * :doc:`cms </reference/configuration/cms>`
+  * :doc:`phlexible_gui </reference/configuration/gui>`
+  * :doc:`phlexible_cms </reference/configuration/cms>`
+  * :doc:`phlexible_metaset </reference/configuration/metaset>`
+  * :doc:`phlexible_mediacache </reference/configuration/mediacache>`
+  * :doc:`phlexible_mediamanager </reference/configuration/mediamanager>`
 
-* :doc:`Twig Extensions </reference/twig/extensions>`
+* **Twig**
 
-* :doc:`Twig Variables </reference/twig/variables>`
+  * :doc:`Extensions Reference </reference/twig/extensions>`
+  * :doc:`Variables Reference </reference/twig/variables>`
