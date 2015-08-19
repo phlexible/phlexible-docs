@@ -4,13 +4,10 @@
 Implementing Navigations
 ========================
 
-Examples
---------
-
 .. _cookbook_templating_navigations_simple:
 
 Simple navigation
-~~~~~~~~~~~~~~~~~
+-----------------
 
 .. code-block:: jinja
 
@@ -33,7 +30,7 @@ This example retrieves the children navigation ``main`` from the :ref:`variables
 .. _cookbook_templating_navigations_children:
 
 Navigaton with children
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 .. code-block:: jinja
 
@@ -59,7 +56,7 @@ This example retrieves the navigation ``side`` from the :ref:`variables_navigati
 .. _cookbook_templating_navigations_access_check:
 
 Navigaton with access checks
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 .. code-block:: jinja
 

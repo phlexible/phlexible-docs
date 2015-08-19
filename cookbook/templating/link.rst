@@ -6,11 +6,8 @@ Creating links from phlexible fields
 
 With phlexible link field you can create different links to external or internal pages.
 
-Examples
---------
-
 Set link from link field
-~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 .. code-block:: jinja
 
@@ -24,7 +21,7 @@ This example retrieves a link value from :ref:`variables_content` and uses the :
 
 
 Set title depending on link type
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 .. code-block:: jinja
 
@@ -49,7 +46,7 @@ For external links, the url from ``link.value.url`` is used, without protocol.
 For internal links the referenced node is retrieved via the :ref:`extensions_tree_node` function and the ``link.value.tid`` value, using title of the node as link title.
 
 Set class depending on link type
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 .. code-block:: jinja
 
@@ -66,7 +63,7 @@ Set class depending on link type
 This example uses the ``link.value.type`` to build a type dependent class name.
 
 Set target for external links
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 .. code-block:: jinja
 

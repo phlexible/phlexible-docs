@@ -6,13 +6,10 @@ Working with Downloads
 
 All media files are located in phlexible media management. You can access them with fields in your element.
 
-Examples
---------
-
 .. _cookbook_templating_downloads_link:
 
 Render a file download link
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 .. code-block:: jinja
 
@@ -27,7 +24,7 @@ This example renderes a link via the :ref:`extensions_download_path` function. I
 .. _cookbook_templating_downloads_media_type_icon:
 
 Add media type Icon to your download link
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 .. hint::
 
