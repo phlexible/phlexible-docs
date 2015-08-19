@@ -4,6 +4,8 @@
 * :doc:`/book/users`
 * :doc:`/book/volumes`
 * :doc:`/book/media_templates`
+* :doc:`/book/media_types`
+* :doc:`/book/meta_sets`
 * :doc:`/book/media_cache`
 * :doc:`/book/siteroots`
 * :doc:`/book/tree`

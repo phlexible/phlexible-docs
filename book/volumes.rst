@@ -1,15 +1,14 @@
 .. index::
-    single: Volumes
+    single: Book; Volumes
 
 Volumes
 =======
 
 Working with media files and folders is a big part of phlexible.
-They are stored in the media manager of the application and have one thing
-in common: The volumes!
+They are stored in the media manager of the application and have one thing in common: The volumes!
 
-Volume
-------
+Volume Management
+-----------------
 
 A volume is a hierarchical set of folder and files, which can be accessed through the (`Volume`_) object.
 To get a volume, you need to retrieve it through the volume manager.

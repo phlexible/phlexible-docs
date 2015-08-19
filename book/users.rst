@@ -4,15 +4,16 @@
 Users
 =====
 
-This article focuses on how to handle users in phlexible. The PhlexibleUserBundle
-uses the `FOSUSerBundle`_ and extends it with additional functionality like groups.
+The PhlexibleUserBundle incorporates the `FOSUSerBundle`_ and extends it with additional functionality like groups, providing a complete user management system.
 
-All access to users is done via the user manager. Analog to this, all access to groups is done via the group manager.
+User Manager
+------------
+
+All access to users is done via the user manager.
 
 .. code-block:: php
 
     $userManager = $this->get('phlexible_user.user_manager');
-    $groupManager = $this->get('phlexible_user.group_manager');
         
 Retrieving Users
 ----------------
@@ -29,7 +30,7 @@ The user manager also provides additional methods for finding users:
 .. code-block:: php
 
     // find users by criteria
-    $user = $userManager->findBy(array('enabled' => 0));
+    $users = $userManager->findBy(array('enabled' => 0));
 
     // find a user by criteria
     $user = $userManager->findOneBy(array('email' => 'john.doe@example.com'));
@@ -68,6 +69,15 @@ To delete an user, call the ``deleteUser()`` method on the user manager:
     // delete user
     $userManager->deleteUser($user);
 
+Group Manager
+-------------
+
+All access to groups is done via the group manager.
+
+.. code-block:: php
+
+    $groupManager = $this->get('phlexible_user.group_manager');
+        
 Retrieving Groups
 -----------------
 

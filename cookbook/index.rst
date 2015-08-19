@@ -4,9 +4,12 @@ The Cookbook
 .. toctree::
     :hidden:
 
-    media/index
+    dashboard/index
     element/index
-    tree/index
+    gui/index
+    media/index
+    problem/index
     templating/index
+    tree/index
 
 .. include:: /cookbook/map.rst.inc

@@ -1,5 +1,5 @@
-.. i    ndex::
-    single: Installation
+.. index::
+    single: Book; Installation
 
 Installing and Configuring phlexible
 ====================================

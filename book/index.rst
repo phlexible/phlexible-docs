@@ -11,6 +11,8 @@ The Book
     volumes
     media_templates
     media_cache
+    media_types
+    meta_sets
     siteroots
     tree
     element_types
