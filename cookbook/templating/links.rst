@@ -1,13 +1,13 @@
 .. index::
    single: Templating; Creating links from phlexible fields
 
-Creating links from phlexible fields
-====================================
+Working with Link Fields
+========================
 
 With phlexible link field you can create different links to external or internal pages.
 
-Set link from link field
--------------------------
+How to create a link from link field
+------------------------------------
 
 .. code-block:: jinja
 
@@ -17,11 +17,11 @@ Set link from link field
 	    <a href="{{ path(link) }}">Absolute link without hostname</a>
     	{% endif %}
 
-This example retrieves a link value from :ref:`variables_content` and uses the :ref:`extensions_url` and :ref:`extensions_path` functions to render different link paths.
+This example retrieves a ``link`` value from :ref:`variables_content` and uses the :ref:`extensions_url` and :ref:`extensions_path` functions to render different link paths.
 
 
-Set title depending on link type
---------------------------------
+How to create a title depending on link type
+--------------------------------------------
 
 .. code-block:: jinja
 
@@ -45,8 +45,8 @@ For external links, the url from ``link.value.url`` is used, without protocol.
 
 For internal links the referenced node is retrieved via the :ref:`extensions_tree_node` function and the ``link.value.tid`` value, using title of the node as link title.
 
-Set class depending on link type
---------------------------------
+How to create a classname depending on link type
+------------------------------------------------
 
 .. code-block:: jinja
 
@@ -62,8 +62,8 @@ Set class depending on link type
 
 This example uses the ``link.value.type`` to build a type dependent class name.
 
-Set target for external links
------------------------------
+How to create target for external links
+---------------------------------------
 
 .. code-block:: jinja
 

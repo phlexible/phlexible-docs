@@ -1,30 +1,31 @@
 .. index::
    single: Templating; Working with Downloads
 
-Working with Downloads
-======================
+Working with File Fields
+========================
 
 All media files are located in phlexible media management. You can access them with fields in your element.
 
 .. _cookbook_templating_downloads_link:
 
-Render a file download link
----------------------------
+How to create a file download link
+----------------------------------
 
 .. code-block:: jinja
 
+    {% set file = content.value('cm_download_file') %}
     {% set fileInfo = fileinfo(file) %}
     <a href="{{ download_path(file) }}">
         {{ title|default(fileInfo.meta.file.title)|default(fileInfo.name) }}
         <span class="meta">({{ fileInfo.mediaType|upper }}, {{ fileInfo.size|readable_size }})</span>
     </a>
 
-This example renderes a link via the :ref:`extensions_download_path` function. Information about the file is retrieved via the :ref:`extensions_fileinfo` function, the title is rendered either from the meta title, or the file name as a fallback. Additionally the file size is rendered via the :ref:`extensions_readable_size` function.
+This example retrieves a ``file`` value from :ref:`variables_content` and renderes a link via the :ref:`extensions_download_path` function. Information about ``file`` is retrieved via the :ref:`extensions_fileinfo` function. The title is rendered either from the meta title, or the file name as a fallback. Additionally the file size is rendered via the :ref:`extensions_readable_size` function.
 
 .. _cookbook_templating_downloads_media_type_icon:
 
-Add media type Icon to your download link
------------------------------------------
+How to create a media type icon for a download link
+---------------------------------------------------
 
 .. hint::
 

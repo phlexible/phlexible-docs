@@ -4,7 +4,8 @@ Templating
 .. toctree::
     :maxdepth: 1
 
-    link
-    navigations
+    links
     images
     downloads
+    navigations
+

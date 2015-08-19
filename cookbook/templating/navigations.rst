@@ -1,13 +1,13 @@
 .. index::
     single: Templating; Implementing Navigation
 
-Implementing Navigations
+Working with Navigations
 ========================
 
 .. _cookbook_templating_navigations_simple:
 
-Simple navigation
------------------
+How to create a simple navigation
+---------------------------------
 
 .. code-block:: jinja
 
@@ -25,12 +25,12 @@ Simple navigation
         </ul>
     {% endif %}
 
-This example retrieves the children navigation ``main`` from the :ref:`variables_navigations` twig variable, and loops over them. Each child ``item` is a :ref:`variables_treeContext`, and is only display if it is ``viewable``.
+This example retrieves the children navigation ``main`` from the :ref:`variables_navigations` twig variable, and loops over them. Each child ``item`` is a :ref:`variables_treeContext`, and is only display if it is ``viewable``.
 
 .. _cookbook_templating_navigations_children:
 
-Navigaton with children
------------------------
+How to create a recursive navigaton
+-----------------------------------
 
 .. code-block:: jinja
 
@@ -55,8 +55,8 @@ This example retrieves the navigation ``side`` from the :ref:`variables_navigati
 
 .. _cookbook_templating_navigations_access_check:
 
-Navigaton with access checks
-----------------------------
+How to create a navigaton with access checks
+--------------------------------------------
 
 .. code-block:: jinja
 
