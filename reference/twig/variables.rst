@@ -66,15 +66,8 @@ The ``content`` variable contains the content of the current node.
 
 Notable accessors are:
 
-* ``content.findValue(name)`` Returns the first value with the given ``name``.
-
-.. _variables_specialTids:
-
-specialTids
------------
-**type**: ``array``
-
-The ``specialTids`` variable contains and array of special tids as name/tid pairs from the current siteroot.
+* ``content.value(name)`` Returns the first value with the given ``name``.
+* ``content.children(name)`` Returns children of ``name``.
 
 .. _variables_navigations:
 
