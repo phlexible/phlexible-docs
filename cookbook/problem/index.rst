@@ -1,7 +1,7 @@
-Media
-=====
+Problems
+========
 
 .. toctree::
     :maxdepth: 2
 
-    working
+    checker

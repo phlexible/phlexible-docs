@@ -1,30 +1,39 @@
-Welcome to phlexible documentation!
-===================================
+
+.. _phlexible_documentation:
+
+.. raw:: html
+
+    <div style="margin-top: 70px; margin-bottom: 50px">
+
+.. image:: /images/phlexible.png
+    :alt: Example, how mime type icons work
+    :align: center
+
+.. raw:: html
+
+    </div>
+
+phlexible CMS
+=============
 
 .. toctree::
     :hidden:
 
-    Home <self>
     book/index
     cookbook/index
     reference/index
     changelog
 
-Book
-----
+The phlexible Book
+------------------
 
-Dive into phlexible 1.0:
+Prepared by the core team, this is the reference that covers the needs for every kind of phlexible developer.
 
-.. include:: /book/map.rst.inc
+:doc:`Read the Book </book/index>`.
 
-Cookbook
---------
+The phlexible Cookbook
+----------------------
 
-Read the :doc:`Cookbook </cookbook/index>`.
+A collection of tutorials explaining how to solve the most recurrent problems faced by phlexible developers.
 
-Reference Documents
--------------------
-
-Get answers quickly with reference documents:
-
-.. include:: /reference/map.rst.inc
+:doc:`Read all Tutorials </cookbook/index>`.

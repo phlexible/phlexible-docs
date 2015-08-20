@@ -1,8 +1,8 @@
 .. index::
-    single: Configuration reference; PhlexibleGui
+    single: Configuration reference; PhlexibleGuiBundle
 
-PhlexibleGuiBundle Configuration ("phlexible_gui")
-==================================================
+phlexible_gui Configuration
+===========================
 
 This reference document is a work in progress. It should be accurate, but
 all options are not yet fully covered.

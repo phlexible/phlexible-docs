@@ -1,5 +1,5 @@
 .. index::
-    single: Media Cache
+    single: Book; Media Cache
 
 Media Cache
 ===========

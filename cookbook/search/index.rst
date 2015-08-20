@@ -1,7 +1,7 @@
-Element
-=======
+Search
+======
 
 .. toctree::
     :maxdepth: 2
 
-    working
+    handler

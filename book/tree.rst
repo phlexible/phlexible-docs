@@ -1,77 +1,100 @@
 .. index::
-    single: Tree
+    single: Book; Tree
 
 Tree
 ====
 
-The tree holds each :doc:`element </book/elements>`
-and defines the project structure. You can think of it as a filesystem:
+The tree is a hierarchical collection of nodes, each nodes points to a content :doc:`element </book/elements>`.
+It defines the page structure of your project. 
+
+You can think of it as a filesystem:
 
 .. code-block:: text
 
     Root [1]
     ├─ Main Navigation [2]
-        ├─ Home [4]
-        ├─ Career [5]
-        └─ Contact [6]
+    |   ├─ Home [4]
+    |   ├─ Career [5]
+    |   └─ Contact [6]
     └─ Meta Navigation [3]
         ├─ Error 500 [7]
         ├─ Error 404 [8]
         └─ Search [9]
 
-Each node represents an element in phlexible. The number in the bracket
-is the id of the element in the the tree. You can create, copy or move nodes
-in the tree and even create instances of nodes at another point in the tree.
+New nodes can created in the tree, existing nodes can be updated, copied or moved inside the tree.
 
-Navigating
-----------
+Tree Manager
+------------
 
-Load the tree and "navigate" through it::
+All access to trees is done via the tree manager. 
 
-    /**
-     * Example of navigating through the tree for a given siteroot
-     */
-    public function navigateAction(Request $request)
-    {
-        $siterootId  = $request->get('siterootId');
-        $treeManager = $this->get('phlexible_tree.tree_manager');
-        $tree        = $treeManager->getBySiteRootId($siterootId);
+.. code-block:: php
 
-        // get "Main Navigation" node (see above)
-        $node = $tree->get(2);
+    $treeManager = $this->get('phlexible_tree.tree_manager');
+        
+Tree
+----
 
-        // get path array - tree nodes or ids
-        $path   = $tree->getPath($node);
-        $idPath = $tree->getIdPath($node);
+Use the tree manager to retrieve a specific tree, either by siteroot id, or by a node id inside the tree.
 
-        // get children of node -> 4,5,6
-        $children = $tree->getChildren($node);
+.. code-block:: php
 
-        // get parent -> 1
-        $parent = $tree->getParent($node);
+    $tree = $treeManager->getBySiterootId($siterootId);
+    $tree = $treeManager->getByNodeId($nodeId);
 
-        // different check methods
-        $isChild     = $tree->isChildOf($childNode, $parentNode);
-        $isParent    = $tree->isParentOf($parentNode, $childNode);
-        $isRoot      = $tree->isRoot($node);
-        $hasChildren = $tree->hasChildren($node);
-    }
-
-Delete Tree Node
+Retrieving Nodes
 ----------------
 
-Delete a tree node by calling::
+Navigate through a tree:
 
-    public function deleteAction(Request $request)
-    {
-        $treeManager = $this->get('phlexible_tree.tree_manager');
+.. code-block:: php
 
-        $siterootId  = $request->get('siterootId');
-        $tree        = $treeManager->getBySiteRootId($siterootId);
-        $node        = $tree->get($id);
+    // get the "Main Navigation" node from the example above
+    $node = $tree->get(2);
 
-        $tree->delete($node, $userId);
+    // get path array - tree nodes or ids
+    $path   = $tree->getPath($node);
+    $idPath = $tree->getIdPath($node);
 
-        // ... return ResultResponse
-    }
+    // get children of node -> 4,5,6
+    $children = $tree->getChildren($node);
+    $childNode = current($children);
+
+    // get parent -> 1
+    $parentNode = $tree->getParent($node);
+
+    // different check methods
+    $isChild     = $tree->isChildOf($childNode, $parentNode);  // will return true
+    $isParent    = $tree->isParentOf($parentNode, $childNode); // will return true
+    $isRoot      = $tree->isRoot($node);                       // will return false
+    $hasChildren = $tree->hasChildren($node);                  // will return true
+
+    $tree->getParent($parentNode);                             // will be null
+
+    $tree->isRoot($tree->getRoot());                           // will return true
+
+Updating Nodes
+--------------
+
+Update a node by calling ``updateNode()`` on the tree:
+
+.. code-block:: php
+
+    $node = $tree->get(4);
+    $node->setAttribute('foo', 'bar');
+
+    $tree->updateNode($node);
+
+Deleting Nodes
+--------------
+
+Delete a node by calling ``delete()`` on the tree:
+
+.. code-block:: php
+
+    $node = $tree->get(4);
+    
+    $tree->delete($node, $userId);
+
+    
 
