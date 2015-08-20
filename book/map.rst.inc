@@ -12,4 +12,5 @@
 * :doc:`/book/elements`
 * :doc:`/book/element_types`
 * :doc:`/book/teasers`
+* :doc:`/book/messages`
 * :doc:`/book/queue`

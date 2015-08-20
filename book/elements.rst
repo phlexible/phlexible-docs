@@ -1,5 +1,5 @@
 .. index::
-    single: Elements
+    single: Book; Elements
 
 Elements
 ========

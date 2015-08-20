@@ -1,5 +1,5 @@
 .. index::
-    single: Queue
+    single: Book; Queue
 
 Queue
 =====

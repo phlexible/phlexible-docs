@@ -1,5 +1,5 @@
 .. index::
-    single: Teasers
+    single: Book; Teasers
 
 Teasers
 =======
