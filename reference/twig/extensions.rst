@@ -286,6 +286,20 @@ download_url
     
 Returns an absolute download URL (with the schema and host) for the file provided by the given file field.
 
+.. _extensions_teaser_render:
+
+teaser_render
+~~~~~~~~~~~~~
+
+.. code-block:: jinja
+
+    {{ teaser_render(teaser) }}
+    
+``teaser``
+    **type**: ``ContentTeaser``
+    
+Renders a teaser.
+
 .. _extensions_fileinfo:
 
 fileinfo
