@@ -75,7 +75,7 @@ the needed bundles in ``AppKernel``::
                 new Igorw\FileServeBundle\IgorwFileServeBundle(),
                 new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
                 new FOS\UserBundle\FOSUserBundle(),
-                new Puli\Extension\Symfony\PuliBundle\PuliBundle(),
+                new Puli\SymfonyBundle\PuliBundle(),
                 new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
                 // phlexible.core
@@ -108,8 +108,6 @@ the needed bundles in ``AppKernel``::
                 new Phlexible\Bundle\FrontendBundle\PhlexibleFrontendBundle(),
                 new Phlexible\Bundle\FrontendMediaBundle\PhlexibleFrontendMediaBundle(),
                 new Phlexible\Bundle\ElementRendererBundle\PhlexibleElementRendererBundle(),
-
-                 new FOS\UserBundle\FOSUserBundle(),
             );
         }
     }
@@ -252,6 +250,20 @@ After that, replace these configuration values in ``app/config/config.yml`` with
             driver: %imagine_driver%
         image_analyzer:
             driver: %image_analyzer_driver%
+
+Third party tools
+`````````````````
+
+Installation of third party tools is straightforward using different sources.
+
+.. code-block:: bash
+
+    ## Installation via macports
+
+    port install swftools
+    port install xpdf # including xpdf-pdfinfo, xpdf-pdftotext
+    port install pdftohtml
+    port install ffmpeg
 
 Routing
 ~~~~~~~
@@ -404,7 +416,7 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
                 path:     /
                 domain:   ~
 
-Add path for backend access control:
+Add path for backend access control (on same level like encoders, role_hierarchy and firewalls):
 
 .. code-block:: yaml
 
@@ -412,7 +424,14 @@ Add path for backend access control:
         - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/users/asset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, roles: login }
+        - { path: ^/admin, roles: ROLE_BACKEND }
+
+Also make sure that there is no firewall rule like
+
+..code-block:: yaml
+
+    main:
+        anonymous: ~
 
 Setup
 -----
@@ -426,7 +445,7 @@ phlexible  brings some database tables which you can install by executing the fo
 
 .. code-block:: bash
 
-    $ php app/console doctrine:schema:update --force
+    $ php bin/console doctrine:schema:update --force
 
 .. note::
 
@@ -451,11 +470,9 @@ Add user
 
 .. code-block:: bash
 
-    $ php app/console fos:user:create admin admin@example.com p@ssw0rd
+    $ php bin/console fos:user:create admin admin@example.com
 
-This command adds a user with username ``admin``, email ``admin@example.com`` and
-password ``p@ssw0rd``. If any of the required arguments are not passed to the command,
-an interactive prompt will ask you to enter them.
+This command adds a user with username ``admin`` and email ``admin@example.com``. If any of the required arguments, like the password, are not passed to the command, an interactive prompt will ask you to enter them.
 
 Promote User
 ............
@@ -464,9 +481,9 @@ To add a role to the user you just created, use the following command:
 
 .. code-block:: bash
 
-    $ php app/console fos:user:promote admin ROLE_SUPER_ADMIN
+    $ php bin/console fos:user:promote admin ROLE_SUPER_ADMIN
 
-This command promotes the user ``admin`` with the role ``ROLE_SUPER_ADMIN``.
+This command promotes the user ``admin`` with the role ``ROLE_SUPER_ADMIN``. See list of `hierarchical roles`_.
 
 Step 3: Add Media Root Folder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -476,7 +493,13 @@ can be created by executing the command:
 
 .. code-block:: bash
 
-    $ php app/console media-manager:init default
+    $ php bin/console media-manager:init default
+
+You also need to publish bundles assets by executing the command:
+
+..code-block:: bash
+
+    $ php bin/console assets:install # with --symlink option on *nix systems
 
 Finish Installation
 -------------------
@@ -504,3 +527,4 @@ about solving problems with phlexible.
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
 .. _`standard command for creating the database schema`: http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema
 .. _`FOSUSerBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle
+.. _ `hierarchical roles`: http://symfony.com/doc/2.0/book/security.html#hierarchical-roles
