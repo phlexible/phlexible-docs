@@ -251,19 +251,27 @@ After that, replace these configuration values in ``app/config/config.yml`` with
         image_analyzer:
             driver: %image_analyzer_driver%
 
-Third party tools
+(Optional) Third party tools
 `````````````````
 
 Installation of third party tools is straightforward using different sources.
 
 .. code-block:: bash
 
-    ## Installation via macports
+    # Installation via macports
 
-    port install swftools
+    port install swftools # including pdf2swf
     port install xpdf # including xpdf-pdfinfo, xpdf-pdftotext
     port install pdftohtml
     port install ffmpeg
+
+    # Installation via homebrew
+
+    brew install freetype libjpeg giflib swftools # resolving dependecies for swftools, including pdf2swf
+    brew tap homebrew/x11 && brew install xpdf
+    brew install pdftohtml
+    brew cask install pdftotext
+    brew install ffmpeg
 
 Routing
 ~~~~~~~
@@ -428,7 +436,7 @@ Add path for backend access control (on same level like encoders, role_hierarchy
 
 Also make sure that there is no firewall rule like
 
-..code-block:: yaml
+.. code-block:: yaml
 
     main:
         anonymous: ~
@@ -483,7 +491,7 @@ To add a role to the user you just created, use the following command:
 
     $ php bin/console fos:user:promote admin ROLE_SUPER_ADMIN
 
-This command promotes the user ``admin`` with the role ``ROLE_SUPER_ADMIN``. See list of `hierarchical roles`_.
+This command promotes the user ``admin`` with the role ``ROLE_SUPER_ADMIN`` (see list of `hierarchical roles`_).
 
 Step 3: Add Media Root Folder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -497,7 +505,7 @@ can be created by executing the command:
 
 You also need to publish bundles assets by executing the command:
 
-..code-block:: bash
+.. code-block:: bash
 
     $ php bin/console assets:install # with --symlink option on *nix systems
 
@@ -527,4 +535,4 @@ about solving problems with phlexible.
 .. _`phlexible Composer Repository`: https://packages.brainbits.net/phlexible-bundles/
 .. _`standard command for creating the database schema`: http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema
 .. _`FOSUSerBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle
-.. _ `hierarchical roles`: http://symfony.com/doc/2.0/book/security.html#hierarchical-roles
+.. _`hierarchical roles`: http://symfony.com/doc/2.0/book/security.html#hierarchical-roles
