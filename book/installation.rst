@@ -453,7 +453,7 @@ phlexible  brings some database tables which you can install by executing the fo
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:schema:update --force
+    $ php app/console doctrine:schema:update --force
 
 .. note::
 
@@ -478,7 +478,7 @@ Add user
 
 .. code-block:: bash
 
-    $ php bin/console fos:user:create admin admin@example.com
+    $ php app/console fos:user:create admin admin@example.com
 
 This command adds a user with username ``admin`` and email ``admin@example.com``. If any of the required arguments, like the password, are not passed to the command, an interactive prompt will ask you to enter them.
 
@@ -489,7 +489,7 @@ To add a role to the user you just created, use the following command:
 
 .. code-block:: bash
 
-    $ php bin/console fos:user:promote admin ROLE_SUPER_ADMIN
+    $ php app/console fos:user:promote admin ROLE_SUPER_ADMIN
 
 This command promotes the user ``admin`` with the role ``ROLE_SUPER_ADMIN`` (see list of `hierarchical roles`_).
 
@@ -501,13 +501,13 @@ can be created by executing the command:
 
 .. code-block:: bash
 
-    $ php bin/console media-manager:init default
+    $ php app/console media-manager:init default
 
 You also need to publish bundles assets by executing the command:
 
 .. code-block:: bash
 
-    $ php bin/console assets:install # with --symlink option on *nix systems
+    $ php app/console assets:install # with --symlink option on *nix systems
 
 Finish Installation
 -------------------
