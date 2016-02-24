@@ -252,7 +252,7 @@ After that, replace these configuration values in ``app/config/config.yml`` with
             driver: %image_analyzer_driver%
 
 (Optional) Third party tools
-`````````````````
+````````````````````````````
 
 Installation of third party tools is straightforward using different sources.
 
@@ -473,8 +473,7 @@ a role to this user.
     phlexible uses the `FOSUSerBundle`_ to handle user management. If you
     are familiar with this bundle, the user creation will be nothing special.
 
-Add user
-........
+**Add user**
 
 .. code-block:: bash
 
@@ -482,8 +481,7 @@ Add user
 
 This command adds a user with username ``admin`` and email ``admin@example.com``. If any of the required arguments, like the password, are not passed to the command, an interactive prompt will ask you to enter them.
 
-Promote User
-............
+**Promote User**
 
 To add a role to the user you just created, use the following command:
 
