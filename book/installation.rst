@@ -174,7 +174,7 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
         volumes:
             default:
                 id: 492d88c5-dd48-4d73-b849-1cacc0a80056 
-                root_dir: %media_manager_root_dir%
+                root_dir: "%media_manager_root_dir%"
                 quota: 1000000000 
                 driver: phlexible_media_manager.driver.doctrine 
 
@@ -224,7 +224,7 @@ After that, replace these configuration values in ``app/config/config.yml`` with
             default:
                 id: phlexible_media_cache.storage.local
                 options:
-                    storage_dir: %media_cache_storage_dir%
+                    storage_dir: "%media_cache_storage_dir%"
 
     phlexible_media_manager:
         volumes:
