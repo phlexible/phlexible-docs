@@ -230,26 +230,26 @@ After that, replace these configuration values in ``app/config/config.yml`` with
         volumes:
             default:
                 id: 492d88c5-dd48-4d73-b849-1cacc0a80056
-                root_dir: %media_manager_root_dir%
+                root_dir: "%media_manager_root_dir%"
                 quota: 1000000000
                 driver: phlexible_media_manager.driver.doctrine
 
     phlexible_media_tool:
         swftools:
-            pdf2swf: %tool_pdf2swf%
+            pdf2swf: "%tool_pdf2swf%"
         poppler:
-            pdfinfo: %tool_pdfinfo%
-            pdftotext: %tool_pdftotext%
-            pdftohtml: %tool_pdftohtml%
+            pdfinfo: "%tool_pdfinfo%"
+            pdftotext: "%tool_pdftotext%"
+            pdftohtml: "%tool_pdftohtml%"
         mime:
-            file: %tool_file%
+            file: "%tool_file%"
         ffmpeg:
-            ffprobe: %tool_ffprobe%
-            ffmpeg: %tool_ffmpeg%
+            ffprobe: "%tool_ffprobe%"
+            ffmpeg: "%tool_ffmpeg%"
         imagine:
-            driver: %imagine_driver%
+            driver: "%imagine_driver%"
         image_analyzer:
-            driver: %image_analyzer_driver%
+            driver: "%image_analyzer_driver%"
 
 (Optional) Third party tools
 ````````````````````````````
@@ -419,7 +419,7 @@ Add a new provider, encoder and firewall configuration to ``app/config/security.
             switch_user:
                 role:     ROLE_ALLOWED_TO_SWITCH
             remember_me:
-                key:      %secret%
+                key:      "%secret%"
                 lifetime: 604800
                 path:     /
                 domain:   ~
