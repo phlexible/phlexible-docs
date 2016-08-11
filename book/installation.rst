@@ -261,7 +261,7 @@ Installation of third party tools is straightforward using different sources.
     # Installation via macports
 
     port install swftools # including pdf2swf
-    port install xpdf # including xpdf-pdfinfo, xpdf-pdftotext
+    port install xpdf # including xpdf-pdfinfo, xpdf-pdftotext, maybe you need to install libXt first, run: sudo port install xorg-libXt +flat_namespace
     port install pdftohtml
     port install ffmpeg
 
