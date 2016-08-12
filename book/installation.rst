@@ -50,7 +50,7 @@ Open a command console, enter your project directory and execute the following c
 
     $ composer require "phlexible/phlexible"
 
-This command requires you to have Composer installed globally, as explained in the `installation chapter`_ installation chapter of the Composer documentation. 
+This command requires you to have Composer installed globally, as explained in the `installation chapter`_ installation chapter of the Composer documentation.
 
 Step 3: Enable phlexible bundles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -173,10 +173,10 @@ phlexible  requires some configuration to be added to app's ``app/config/config.
     phlexible_media_manager:
         volumes:
             default:
-                id: 492d88c5-dd48-4d73-b849-1cacc0a80056 
+                id: 492d88c5-dd48-4d73-b849-1cacc0a80056
                 root_dir: "%media_manager_root_dir%"
-                quota: 1000000000 
-                driver: phlexible_media_manager.driver.doctrine 
+                quota: 1000000000
+                driver: phlexible_media_manager.driver.doctrine
 
     phlexible_media_tool:
         swftools:
@@ -258,14 +258,33 @@ Installation of third party tools is straightforward using different sources.
 
 .. code-block:: bash
 
+    #
+    # Installation via apt-get
+    #
+
+    apt-get install swftools xpdf poppler-utils libav-tools # maybe: apt-get install imagemagick php5-imagick php5-gd
+
+    # ==>
+    # tool_pdf2swf: build from source
+    # tool_pdfinfo: /usr/bin/pdfinfo
+    # tool_pdftohtml: /usr/bin/pdftohtml
+    # tool_pdftotext: /usr/bin/pdftotext
+    # tool_file: /usr/bin/file
+    # tool_ffprobe: /usr/bin/avprobe
+    # tool_ffmpeg: /usr/bin/avconv
+
+    #
     # Installation via macports
+    #
 
     port install swftools # including pdf2swf
     port install xpdf # including xpdf-pdfinfo, xpdf-pdftotext
     port install pdftohtml
     port install ffmpeg
 
+    #
     # Installation via homebrew
+    #
 
     brew install freetype libjpeg giflib swftools # resolving dependecies for swftools, including pdf2swf
     brew tap homebrew/x11 && brew install xpdf
@@ -287,7 +306,7 @@ To make the backend routes available, you have to add a resource to ``app/config
     phlexible_teaser_render:
         resource: "@PhlexibleTeaserBundle/Controller/RenderController.php"
         type:     annotation
-        
+
     admin:
         resource: admin_routing.yml
         prefix:   /admin
