@@ -262,7 +262,7 @@ Installation of third party tools is straightforward using different sources.
     # Installation via apt-get
     #
 
-    apt-get install swftools xpdf poppler-utils libav-tools
+    apt-get install swftools xpdf poppler-utils libav-tools # maybe: apt-get install imagemagick php5-imagick php5-gd
 
     # ==>
     # tool_pdf2swf: build from source
